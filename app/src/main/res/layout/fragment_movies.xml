@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager_slider_image"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_slider_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ver_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/margin_normal_100" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ver_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/margin_normal_100" />
+
+        <TextView
+            android:id="@+id/title_popular"
+            style="@style/NormalTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/title_popular"
+            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+            app:layout_constraintTop_toBottomOf="@+id/view_pager_slider_image" />
+
+        <TextView
+            android:id="@+id/text_popular_see_all"
+            style="@style/NormalSecondaryTextAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_see_all"
+            app:layout_constraintBaseline_toBaselineOf="@id/title_popular"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_popular_movies"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_item_movie"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+            app:layout_constraintTop_toBottomOf="@+id/title_popular" />
+
+        <TextView
+            android:id="@+id/title_latest"
+            style="@style/NormalTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/title_latest"
+            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_popular_movies" />
+
+        <TextView
+            android:id="@+id/title_latest_see_all"
+            style="@style/NormalSecondaryTextAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_see_all"
+            app:layout_constraintBaseline_toBaselineOf="@id/title_latest"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+            tools:layout_editor_absoluteY="442dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_latest_movies"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_item_movie"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+            app:layout_constraintTop_toBottomOf="@+id/title_latest" />
+
+        <TextView
+            android:id="@+id/title_upcoming"
+            style="@style/NormalTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/title_upcoming"
+            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_latest_movies" />
+
+        <TextView
+            android:id="@+id/text_upcoming_see_all"
+            style="@style/NormalSecondaryTextAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_see_all"
+            app:layout_constraintBaseline_toBaselineOf="@id/title_upcoming"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_upcoming_movies"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_item_movie"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+            app:layout_constraintTop_toBottomOf="@+id/title_upcoming" />
+
+        <TextView
+            android:id="@+id/title_categories"
+            style="@style/NormalTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/title_list_categories"
+            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_upcoming_movies" />
+
+g
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

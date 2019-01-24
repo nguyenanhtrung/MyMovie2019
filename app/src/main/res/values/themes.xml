@@ -1,0 +1,8 @@
+<resources>
+    <style name="FirstTheme" parent="Base.MyTheme">
+    </style>
+
+    <style name="SplashTheme" parent="FirstTheme">
+        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+    </style>
+</resources>

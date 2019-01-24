@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.MainButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAppearance">@style/ButtonTextAppearance</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
+    
+    <style name="Widget.MainTextView" parent="">
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:autoSizeStepGranularity">@dimen/size_step_granularity</item>
+        <item name="autoSizeStepGranularity">@dimen/size_step_granularity</item>
+        <item name="android:autoSizeMinTextSize">@dimen/min_text_size</item>
+        <item name="autoSizeMinTextSize">@dimen/min_text_size</item>
+        <item name="android:autoSizeMaxTextSize">@dimen/max_text_size</item>
+        <item name="autoSizeMaxTextSize">@dimen/max_text_size</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Widget.MainEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textAppearance">@style/EditTextAppearance</item>
+    </style>
+
+    <style name="Widget.PasswordEditText" parent="Widget.MainEditText">
+        <item name="android:inputType">textPassword</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Base.TextInputLayout" parent="Base.Widget.MaterialComponents.TextInputLayout">
+        <item name="errorTextAppearance">@style/ErrorTextAppearance</item>
+    </style>
+
+    <style name="Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:elevation">@dimen/toolbar_elevation</item>
+        <item name="titleTextAppearance">@style/NormalTitleAppearance</item>
+        <item name="android:minHeight">?actionBarSize</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="Widget.BottomNavBar" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="itemIconTint">@color/selector_bottom_nav_bar</item>
+        <item name="itemTextColor">@color/selector_bottom_nav_bar</item>
+        <item name="android:textAppearance">@style/NormalTextAppearance</item>
+    </style>
+
+    <style name="Widget.MainCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/colorSurface</item>
+    </style>
+</resources>

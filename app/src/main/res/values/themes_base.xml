@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.MyTheme.V1" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorBackground">@color/colorBackground</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
+        <item name="colorPrimaryText">@color/colorPrimaryText</item>
+        <item name="colorSecondaryText">@color/colorSecondaryText</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="materialButtonStyle">@style/Widget.MainButton</item>
+        <item name="editTextStyle">@style/Widget.MainEditText</item>
+        <item name="textInputStyle">@style/Base.TextInputLayout</item>
+        <item name="android:textViewStyle">@style/Widget.MainTextView</item>
+        <item name="materialCardViewStyle">@style/Widget.MainCardView</item>
+        <item name="toolbarStyle">@style/Widget.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.BottomNavBar</item>
+    </style>
+
+    <style name="Base.MyTheme" parent="Base.MyTheme.V1">
+
+    </style>
+
+
+</resources>

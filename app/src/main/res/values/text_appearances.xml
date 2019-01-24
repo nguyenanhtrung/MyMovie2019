@@ -1,0 +1,55 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.TextAppearance" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/open_sans</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="NormalTitleAppearance" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="NormalTextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="NormalSecondaryTextAppearance" parent="NormalTextAppearance">
+        <item name="android:textColor">@color/colorSecondaryText</item>
+    </style>
+
+    <style name="SecondaryTitleAppearance" parent="NormalTitleAppearance">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="SubTitleAppearance" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="ButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EditTextAppearance" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ErrorTextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textColor">@color/colorError</item>
+    </style>
+
+
+</resources>

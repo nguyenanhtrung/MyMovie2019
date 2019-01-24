@@ -1,0 +1,16 @@
+<resources>
+    <color name="colorPrimary">#252c3e</color>
+    <color name="colorPrimaryDark">#252c3e</color>
+    <color name="colorSecondary">#fff176</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorSurface">#455270</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorBackground">#252c3e</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorError">#e57373</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorPrimaryText">#FFFFFF</color>
+    <color name="colorSecondaryText">#fff176</color>
+    <color name="colorStateNormal">#99FFFFFF</color>
+</resources>

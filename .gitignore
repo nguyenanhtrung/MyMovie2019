@@ -11,4 +11,4 @@
 /build
 /captures
 .externalNativeBuild
-/index.pb
+.idea/sonarlint/issuestore/index.pb

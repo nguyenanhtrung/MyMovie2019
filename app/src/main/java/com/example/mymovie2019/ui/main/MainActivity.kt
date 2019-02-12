@@ -18,11 +18,11 @@ class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
-    val mainViewModel by lazy {
+    private val mainViewModel by lazy {
         ViewModelProviders.of(this,viewModelFactory)[MainViewModel::class.java]
     }
 
-    val appBarConfiguration by lazy {
+    private val appBarConfiguration by lazy {
         AppBarConfiguration(findNavController(R.id.fragment_host).graph)
     }
 
@@ -30,6 +30,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupUIComponents()
+        //test
+        mainViewModel.loadGenresFromServer()
     }
 
     private fun setupUIComponents() {
@@ -50,8 +52,7 @@ class MainActivity : BaseActivity() {
 
     override fun getSnackBarViewGroup(): View = root_layout
 
-    override fun injectDependencies() {
-        val myApplication = application as MyApplication
+    override fun injectDependencies(myApplication: MyApplication) {
         myApplication.appComponent.inject(this)
     }
 }

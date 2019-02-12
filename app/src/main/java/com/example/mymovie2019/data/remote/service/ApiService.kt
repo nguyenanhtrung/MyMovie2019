@@ -7,9 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/genre/movie/list")
-    fun getGenresOfMovie(@Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<GenreResponse>
+    @GET("genre/movie/list")
+    fun getGenresOfMovieAsync(@Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<GenreResponse>
 
-    @GET("/genre/tv/list")
-    fun getGenresOfTvShow(@Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<GenreResponse>
+    @GET("genre/tv/list")
+    fun getGenresOfTvShowAsync(@Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<GenreResponse>
 }

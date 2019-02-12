@@ -9,10 +9,10 @@ class GenreRemoteDataSourceImp @Inject constructor(private val apiService: ApiSe
 
 
     override fun getGenresMovieFromServer(apiKey: String): Deferred<GenreResponse> {
-        return apiService.getGenresOfMovie(apiKey)
+        return apiService.getGenresOfMovieAsync(apiKey)
     }
 
     override fun getGenresTvShowFromServer(apiKey: String): Deferred<GenreResponse> {
-        return apiService.getGenresOfTvShow(apiKey)
+        return apiService.getGenresOfTvShowAsync(apiKey)
     }
 }

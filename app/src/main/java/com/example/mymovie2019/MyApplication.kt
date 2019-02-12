@@ -1,6 +1,7 @@
 package com.example.mymovie2019
 
 import android.app.Application
+import android.os.StrictMode
 import com.example.mymovie2019.di.component.AppComponent
 import com.example.mymovie2019.di.component.DaggerAppComponent
 import com.example.mymovie2019.di.module.AppModule
@@ -23,6 +24,7 @@ class MyApplication : Application() {
         super.onCreate()
         setupLeakCanary()
         setupLogging()
+        setupStrictMode()
         appComponent.inject(this)
     }
 
@@ -33,6 +35,18 @@ class MyApplication : Application() {
             return;
         }
         LeakCanary.install(this);
+    }
+
+    private fun setupStrictMode() {
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+                .detectNetwork()
+                .detectDiskReads()
+                .detectDiskWrites()
+                .penaltyLog()
+                .build()
+            )
+        }
     }
 
     private fun setupLogging() {

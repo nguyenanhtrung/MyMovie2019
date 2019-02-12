@@ -38,7 +38,7 @@ class DialogLoadingFragment : DialogFragment() {
 
 
     private fun setupWindowDialog() {
-        val window = dialog.window
+        val window = dialog?.window
         window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         window?.setBackgroundDrawable((ColorDrawable(Color.TRANSPARENT)))
     }

@@ -6,8 +6,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.R
 import com.example.mymovie2019.data.local.model.ErrorState
 import com.example.mymovie2019.data.local.model.LoadingState
@@ -15,7 +15,7 @@ import com.example.mymovie2019.ui.custom.DialogLoadingFragment
 import com.example.mymovie2019.utils.ConnectionLiveData
 import com.google.android.material.snackbar.Snackbar
 
-abstract class BaseActivity : AppCompatActivity(), LifecycleOwner {
+abstract class BaseActivity : AppCompatActivity() {
 
 
     private val baseViewModel by lazy {
@@ -33,25 +33,19 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner {
     private lateinit var snackBarMessage: Snackbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        injectDependencies(application as MyApplication)
         super.onCreate(savedInstanceState)
-        injectDependencies()
-
         subscribeLoadingLiveData()
         subscribeErrorMessageLiveData()
         subscribeNetworkState()
     }
 
+
     private fun subscribeNetworkState() {
         connectionLiveData.observe(this, Observer { isConnected ->
             when (isConnected) {
                 true -> hideErrorMessage()
-                else -> showErrorMessageWithAction(
-                    ErrorState.WithAction(
-                        getString(R.string.title_network_error),
-                        { hideErrorMessage() },
-                        getString(R.string.title_retry)
-                    )
-                )
+                else -> showErrorMessageNoAction(getString(R.string.title_network_error),Snackbar.LENGTH_INDEFINITE)
             }
         })
     }
@@ -111,7 +105,7 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner {
         inputMethodManager.hideSoftInputFromWindow(input.windowToken, 0)
     }
 
-    abstract fun injectDependencies()
+    abstract fun injectDependencies(application: MyApplication)
     abstract fun createViewModel(): BaseViewModel
     abstract fun getSnackBarViewGroup(): View
 

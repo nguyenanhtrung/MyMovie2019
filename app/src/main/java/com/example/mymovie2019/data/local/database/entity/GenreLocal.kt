@@ -4,9 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "Genre")
 data class GenreLocal(
-    @PrimaryKey(autoGenerate = false)
+
     @ColumnInfo(name = "id")
     val id: Long,
 
@@ -16,4 +16,7 @@ data class GenreLocal(
     @ColumnInfo(name = "type")
     val type: String
 ) {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "primary_id")
+    var primaryId: Long = 0
 }

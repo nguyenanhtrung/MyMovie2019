@@ -1,11 +1,13 @@
 package com.example.mymovie2019.ui.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.data.local.model.LoadingState
 
 abstract class BaseFragment : Fragment() {
@@ -18,9 +20,13 @@ abstract class BaseFragment : Fragment() {
         bindActivityViewModel()
     }
 
+    override fun onAttach(context: Context) {
+        injectDependencies(context.applicationContext as MyApplication)
+        super.onAttach(context)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        injectDependencies()
         baseViewModel
         activityViewModel
         setupBundle()
@@ -53,7 +59,7 @@ abstract class BaseFragment : Fragment() {
         })
     }
 
-    abstract fun injectDependencies()
+    abstract fun injectDependencies(myApplication: MyApplication)
     abstract fun setupBundle()
     abstract fun createFragmentViewModel() : BaseViewModel
     abstract fun bindActivityViewModel() : BaseViewModel

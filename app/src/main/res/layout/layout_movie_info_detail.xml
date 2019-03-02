@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_ver_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/margin_normal_100" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_ver_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/margin_normal_100" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/margin_normal_100" />
+
+    <TextView
+        android:id="@+id/title_original"
+        android:textAppearance="@style/NormalSubTitleAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top"
+        android:text="@string/title_original" />
+
+    <TextView
+        android:id="@+id/text_original"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/PrimarySubTitleAppearance"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_original"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_mid"
+        tools:text="@tools:sample/full_names" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_ver_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <TextView
+        android:id="@+id/title_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/title_status"
+        android:textAppearance="@style/NormalSubTitleAppearance"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+        app:layout_constraintTop_toBottomOf="@+id/title_original" />
+
+    <TextView
+        android:id="@+id/text_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/PrimarySubTitleAppearance"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_status"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_mid"
+        tools:text="Released" />
+
+    <TextView
+        android:id="@+id/title_run_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_100"
+        android:text="@string/title_runtime"
+        android:textAppearance="@style/NormalSubTitleAppearance"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+        app:layout_constraintTop_toBottomOf="@+id/title_status" />
+
+    <TextView
+        android:id="@+id/text_runtime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/PrimarySubTitleAppearance"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_run_time"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_mid"
+        tools:text="2h2m" />
+
+    <TextView
+        android:id="@+id/title_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_100"
+        android:text="@string/title_categories"
+        android:textAppearance="@style/NormalSubTitleAppearance"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+        app:layout_constraintTop_toBottomOf="@+id/title_run_time" />
+
+    <TextView
+        android:id="@+id/text_categories"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/PrimarySubTitleAppearance"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_categories"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_mid"
+        tools:text="Action,Science Fiction, Thriller" />
+
+    <TextView
+        android:id="@+id/title_premiere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_100"
+        android:text="@string/title_premiere"
+        android:textAppearance="@style/NormalSubTitleAppearance"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+        app:layout_constraintTop_toBottomOf="@+id/title_categories" />
+
+    <TextView
+        android:id="@+id/text_premiere"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/PrimarySubTitleAppearance"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_premiere"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_mid"
+        tools:text="January 31, 2019" />
+
+    <TextView
+    android:id="@+id/title_budget"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_normal_100"
+    android:text="@string/title_budget"
+    android:textAppearance="@style/NormalSubTitleAppearance"
+    app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+    app:layout_constraintTop_toBottomOf="@+id/title_premiere" />
+
+    <TextView
+        android:id="@+id/text_budget"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/PrimarySubTitleAppearance"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_budget"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_mid"
+        tools:text="$170,000,000" />
+
+    <TextView
+        android:id="@+id/title_revenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_100"
+        android:text="@string/title_revenue"
+        android:textAppearance="@style/NormalSubTitleAppearance"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+        app:layout_constraintTop_toBottomOf="@+id/title_budget" />
+
+    <TextView
+        android:id="@+id/text_revenue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/PrimarySubTitleAppearance"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_revenue"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_mid"
+        tools:text="$200,000,000" />
+
+    <TextView
+        android:id="@+id/title_homepage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_100"
+        android:text="@string/title_homepage"
+        android:textAppearance="@style/NormalSubTitleAppearance"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
+        app:layout_constraintTop_toBottomOf="@+id/title_revenue" />
+
+    <TextView
+        android:id="@+id/text_homepage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/PrimarySubTitleAppearance"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_homepage"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_ver_mid"
+        tools:text="movies.com" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

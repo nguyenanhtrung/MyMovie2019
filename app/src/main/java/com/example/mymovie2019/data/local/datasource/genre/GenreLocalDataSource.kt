@@ -8,4 +8,6 @@ interface GenreLocalDataSource {
     fun saveGenres(genres: List<GenreLocal>): List<Long>
 
     fun getGenres(genreCategory: GenreCategory, offSet: Int, limit: Int): LiveData<List<GenreLocal>>
+
+    fun countGenres() : Long
 }

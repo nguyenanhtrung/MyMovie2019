@@ -30,14 +30,17 @@ abstract class BaseActivity : AppCompatActivity() {
         ConnectionLiveData(this)
     }
 
+
     private lateinit var snackBarMessage: Snackbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies(application as MyApplication)
         super.onCreate(savedInstanceState)
+        dialogLoading
         subscribeLoadingLiveData()
         subscribeErrorMessageLiveData()
         subscribeNetworkState()
+
     }
 
 
@@ -45,7 +48,7 @@ abstract class BaseActivity : AppCompatActivity() {
         connectionLiveData.observe(this, Observer { isConnected ->
             when (isConnected) {
                 true -> hideErrorMessage()
-                else -> showErrorMessageNoAction(getString(R.string.title_network_error),Snackbar.LENGTH_INDEFINITE)
+                else -> showErrorMessageNoAction(getString(R.string.title_network_error), Snackbar.LENGTH_INDEFINITE)
             }
         })
     }
@@ -82,7 +85,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private fun subscribeLoadingLiveData() {
-        baseViewModel.loadingLiveData.observe(this@BaseActivity, Observer { loadingState ->
+        baseViewModel.loadingLiveData.observe(this@BaseActivity, Observer {loadingState ->
             loadingState?.let {
                 when (it) {
                     LoadingState.Show -> showLoading()

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_small_100"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_cast"
+        android:layout_width="@dimen/width_image_cast"
+        android:layout_height="@dimen/height_image_cast"
+        style="@style/Widget.CircleCastImage"
+        tools:src="@tools:sample/avatars"
+        />
+
+    <TextView
+        android:id="@+id/text_cast_name_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/full_names"
+        style="@style/HighlightSubTitleAppearance"
+        android:layout_toEndOf="@id/image_cast"
+        android:layout_marginTop="@dimen/margin_small_100"
+        android:layout_marginStart="@dimen/margin_normal_100"
+        android:layout_marginEnd="@dimen/margin_small_100"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        android:id="@+id/text_character_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/full_names"
+        android:textAppearance="@style/NormalSubTitleAppearance"
+        android:layout_below="@id/text_cast_name_horizontal"
+        android:layout_toEndOf="@id/image_cast"
+        android:layout_alignEnd="@id/text_cast_name_horizontal"
+        android:layout_alignStart="@id/text_cast_name_horizontal"
+        />
+
+</RelativeLayout>

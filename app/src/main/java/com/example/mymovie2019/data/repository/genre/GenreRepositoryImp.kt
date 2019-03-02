@@ -22,6 +22,8 @@ class GenreRepositoryImp @Inject constructor(
         return genreLocalDataSource.getGenres(genreCategory,limit,offSet)
     }
 
+    override fun countGenres(): Long = genreLocalDataSource.countGenres()
+
     override fun getGenresMovieFromServer(apiKey: String): Deferred<GenreResponse> {
         return genreRemoteDataSource.getGenresMovieFromServer(apiKey)
     }

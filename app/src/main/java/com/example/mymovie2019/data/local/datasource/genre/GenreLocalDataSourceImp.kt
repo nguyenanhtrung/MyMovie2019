@@ -15,4 +15,8 @@ class GenreLocalDataSourceImp @Inject constructor(private val genreDao: GenreDao
     override fun getGenres(genreCategory: GenreCategory, offSet: Int, limit: Int): LiveData<List<GenreLocal>> {
         return genreDao.getGenres(genreCategory.categoryName,offSet, limit)
     }
+
+    override fun countGenres(): Long {
+        return genreDao.countGenres()
+    }
 }

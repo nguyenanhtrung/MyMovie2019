@@ -18,7 +18,6 @@ class MoviesFragment : BaseFragment() {
         const val TAG = "MoviesFragment"
 
         fun newInstance(): MoviesFragment {
-
             val fragment = MoviesFragment()
             return fragment
         }
@@ -35,8 +34,8 @@ class MoviesFragment : BaseFragment() {
         ViewModelProviders.of(requireActivity())[MainViewModel::class.java]
     }
 
-    override fun injectDependencies(application: MyApplication) {
-        val appComponent = application.appComponent
+    override fun injectDependencies(myApplication: MyApplication) {
+        val appComponent = myApplication.appComponent
         appComponent.inject(this)
     }
 
@@ -52,6 +51,7 @@ class MoviesFragment : BaseFragment() {
     }
 
     override fun setupUIComponents() {
+
     }
 
     override fun setupUIEvents() {

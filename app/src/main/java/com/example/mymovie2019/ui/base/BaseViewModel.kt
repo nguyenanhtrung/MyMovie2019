@@ -5,16 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mymovie2019.data.local.model.ErrorState
 import com.example.mymovie2019.data.local.model.LoadingState
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel : ViewModel(), CoroutineScope {
 
-    val job: Job = Job()
+    private val job: Job = Job()
+    private val handlerException = CoroutineExceptionHandler { _, throwable ->
+        Timber.e(throwable)
+    }
+
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+        get() = job + Dispatchers.Main + handlerException
 
     private val _loadingLiveData by lazy {
         MutableLiveData<LoadingState>()

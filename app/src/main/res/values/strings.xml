@@ -11,4 +11,15 @@
     <string name="title_network_error">Network not available!</string>
     <string name="title_retry">Retry</string>
     <string name="title_search_movie">Search Movie</string>
+    <string name="title_cast_list">Casts</string>
+    <string name="title_detail">Detail</string>
+    <string name="title_original">Original title: </string>
+    <string name="title_status">Status:</string>
+    <string name="title_runtime">Runtime:</string>
+    <string name="title_categories">Categories:</string>
+    <string name="title_premiere">Premiere:</string>
+    <string name="title_budget">Budget</string>
+    <string name="title_revenue">Revenue:</string>
+    <string name="title_homepage">Homepage:</string>
+    <string name="title_watch">WATCH</string>
 </resources>

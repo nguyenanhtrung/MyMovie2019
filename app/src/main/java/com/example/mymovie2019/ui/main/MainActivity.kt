@@ -30,8 +30,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupUIComponents()
-        //test
-        mainViewModel.loadGenresFromServer()
+
+
     }
 
     private fun setupUIComponents() {
@@ -55,4 +55,6 @@ class MainActivity : BaseActivity() {
     override fun injectDependencies(myApplication: MyApplication) {
         myApplication.appComponent.inject(this)
     }
+
+
 }

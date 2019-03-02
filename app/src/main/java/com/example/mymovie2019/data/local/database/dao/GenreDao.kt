@@ -10,4 +10,7 @@ interface GenreDao : BaseDao<GenreLocal> {
 
     @Query("SELECT * FROM Genre WHERE type LIKE :type LIMIT :limit OFFSET :offset")
     fun getGenres(type: String, offset: Int, limit: Int): LiveData<List<GenreLocal>>
+
+    @Query("SELECT COUNT(*) FROM Genre")
+    fun countGenres() : Long
 }

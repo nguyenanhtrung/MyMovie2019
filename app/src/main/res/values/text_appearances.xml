@@ -3,6 +3,15 @@
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily" tools:ignore="NewApi">@font/open_sans</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:autoSizeStepGranularity">@dimen/size_step_granularity</item>
+        <item name="autoSizeStepGranularity">@dimen/size_step_granularity</item>
+        <item name="android:autoSizeMinTextSize">@dimen/min_text_size</item>
+        <item name="autoSizeMinTextSize">@dimen/min_text_size</item>
+        <item name="android:autoSizeMaxTextSize">@dimen/max_text_size</item>
+        <item name="autoSizeMaxTextSize">@dimen/max_text_size</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="NormalTitleAppearance" parent="TextAppearance.MaterialComponents.Headline6">
@@ -11,10 +20,17 @@
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
-    <style name="NormalTextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+
+
+    <style name="NormalTextAppearance" parent="Base.TextAppearance">
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="MultilineTextAppearance" parent="NormalTextAppearance">
+        <item name="android:maxLines">10</item>
     </style>
 
     <style name="NormalSecondaryTextAppearance" parent="NormalTextAppearance">
@@ -25,7 +41,25 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="SubTitleAppearance" parent="TextAppearance.MaterialComponents.Subtitle1">
+    <style name="HighlightSubTitleAppearance" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:maxLines">2</item>
+    </style>
+    
+    <style name="HighlightSecondaryTitleAppearance" parent="HighlightSubTitleAppearance">
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="NormalSubTitleAppearance" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textColor">@color/colorMediumText</item>
+    </style>
+    
+    <style name="PrimarySubTitleAppearance" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="fontFamily">@font/open_sans_semibold</item>
         <item name="android:fontFamily">@font/open_sans_semibold</item>
         <item name="android:textColor">@color/colorPrimaryText</item>

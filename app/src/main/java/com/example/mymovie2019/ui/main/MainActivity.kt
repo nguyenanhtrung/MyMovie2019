@@ -30,7 +30,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupUIComponents()
-
+        //
+        mainViewModel.loadGenres()
 
     }
 
@@ -52,8 +53,8 @@ class MainActivity : BaseActivity() {
 
     override fun getSnackBarViewGroup(): View = root_layout
 
-    override fun injectDependencies(myApplication: MyApplication) {
-        myApplication.appComponent.inject(this)
+    override fun injectDependencies(application: MyApplication) {
+        application.appComponent.inject(this)
     }
 
 

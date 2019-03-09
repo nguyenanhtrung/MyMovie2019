@@ -22,9 +22,7 @@ abstract class BaseActivity : AppCompatActivity() {
         createViewModel()
     }
 
-    private val dialogLoading by lazy {
-        DialogLoadingFragment.newInstance()
-    }
+    private var dialogLoading: DialogLoadingFragment? = null
 
     private val connectionLiveData by lazy {
         ConnectionLiveData(this)
@@ -36,7 +34,6 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies(application as MyApplication)
         super.onCreate(savedInstanceState)
-        dialogLoading
         subscribeLoadingLiveData()
         subscribeErrorMessageLiveData()
         subscribeNetworkState()
@@ -78,14 +75,14 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private fun showErrorMessageWithAction(errorMessage: ErrorState.WithAction) {
         Snackbar.make(getSnackBarViewGroup(), errorMessage.message, Snackbar.LENGTH_INDEFINITE)
-            .setAction(errorMessage.actionName) {
-                errorMessage.action()
-            }
-            .show()
+                .setAction(errorMessage.actionName) {
+                    errorMessage.action()
+                }
+                .show()
     }
 
     private fun subscribeLoadingLiveData() {
-        baseViewModel.loadingLiveData.observe(this@BaseActivity, Observer {loadingState ->
+        baseViewModel.loadingLiveData.observe(this@BaseActivity, Observer { loadingState ->
             loadingState?.let {
                 when (it) {
                     LoadingState.Show -> showLoading()
@@ -96,11 +93,16 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected fun showLoading() {
-        dialogLoading.show(supportFragmentManager, DialogLoadingFragment.TAG)
+        if (dialogLoading == null) {
+            dialogLoading = DialogLoadingFragment.newInstance()
+        }
+        dialogLoading!!.show(supportFragmentManager, DialogLoadingFragment.TAG)
+
     }
 
     protected fun hideLoading() {
-        dialogLoading.dismiss()
+        dialogLoading?.dismiss()
+        dialogLoading = null
     }
 
     protected fun hideKeyboard(input: View) {

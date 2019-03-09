@@ -23,7 +23,6 @@
             android:id="@+id/circle_indicator"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_circle_indicator"
-            android:layout_marginBottom="@dimen/margin_normal_150"
             app:layout_constraintBottom_toBottomOf="@id/view_pager_slider_image"
             app:layout_constraintStart_toStartOf="@id/guideline_ver_start"
             app:layout_constraintEnd_toEndOf="@id/guideline_ver_end"
@@ -43,100 +42,16 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/margin_normal_100" />
 
-        <TextView
-            android:id="@+id/title_popular"
-            style="@style/NormalTitleAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/title_popular"
-            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
-            app:layout_constraintTop_toBottomOf="@+id/view_pager_slider_image" />
-
-        <TextView
-            android:id="@+id/text_popular_see_all"
-            style="@style/NormalSecondaryTextAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_see_all"
-            app:layout_constraintBaseline_toBaselineOf="@id/title_popular"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_popular_movies"
+            android:id="@+id/recycler_view_vertical_movies"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal_100"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="horizontal"
-            tools:listitem="@layout/item_movie_horizontal"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
-            app:layout_constraintTop_toBottomOf="@+id/title_popular" />
-
-        <TextView
-            android:id="@+id/title_latest"
-            style="@style/NormalTitleAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal_100"
-            android:text="@string/title_latest"
-            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerview_popular_movies" />
-
-        <TextView
-            android:id="@+id/title_latest_see_all"
-            style="@style/NormalSecondaryTextAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_see_all"
-            app:layout_constraintBaseline_toBaselineOf="@id/title_latest"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
-            tools:layout_editor_absoluteY="442dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_latest_movies"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal_100"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="horizontal"
-            tools:listitem="@layout/item_movie_horizontal"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
-            app:layout_constraintTop_toBottomOf="@+id/title_latest" />
-
-        <TextView
-            android:id="@+id/title_upcoming"
-            style="@style/NormalTitleAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/title_upcoming"
-            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerview_latest_movies" />
-
-        <TextView
-            android:id="@+id/text_upcoming_see_all"
-            style="@style/NormalSecondaryTextAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_see_all"
-            app:layout_constraintBaseline_toBaselineOf="@id/title_upcoming"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
-             />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_upcoming_movies"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal_100"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="horizontal"
-            tools:listitem="@layout/item_movie_horizontal"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
-            app:layout_constraintTop_toBottomOf="@+id/title_upcoming" />
+            app:layout_constraintStart_toStartOf="@id/guideline_ver_start"
+            app:layout_constraintEnd_toEndOf="@id/guideline_ver_end"
+            app:layout_constraintTop_toBottomOf="@id/view_pager_slider_image"
+            tools:listitem="@layout/item_vertical_recyclerview_movies"
+            />
 
         <TextView
             android:id="@+id/title_categories"
@@ -146,7 +61,7 @@
             android:layout_marginTop="@dimen/margin_normal_100"
             android:text="@string/title_list_categories"
             app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerview_upcoming_movies" />
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_vertical_movies" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_categories"

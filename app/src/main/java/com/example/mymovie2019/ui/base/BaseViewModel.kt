@@ -36,17 +36,21 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
     val errorStateLiveData: LiveData<ErrorState>
         get() = _errorStateLiveData
 
-    internal fun showLoading() {
+     fun showLoading() {
         _loadingLiveData.value = LoadingState.Show
     }
 
-    internal fun hideLoading() {
+     fun hideLoading() {
         _loadingLiveData.value = LoadingState.Hide
     }
 
     internal fun showError(errorState: ErrorState) {
         _errorStateLiveData.value = errorState
     }
+
+
+
+
 
     override fun onCleared() {
         super.onCleared()

@@ -1,6 +1,7 @@
 package com.example.mymovie2019.data.remote.service
 
 import com.example.mymovie2019.data.remote.response.GenreResponse
+import com.example.mymovie2019.data.remote.response.MoviesResponse
 import com.example.mymovie2019.utils.AppKey
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
@@ -12,4 +13,25 @@ interface ApiService {
 
     @GET("genre/tv/list")
     fun getGenresOfTvShowAsync(@Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<GenreResponse>
+
+    @GET("movie/popular")
+    fun getPopularMovies(
+            @Query(AppKey.PAGE_PARAMETER) page: Int,
+            @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+
+    ): Deferred<MoviesResponse>
+
+    @GET("movie/upcoming")
+    fun getUpcomingMovies(
+        @Query(AppKey.PAGE_PARAMETER) page: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+
+    ): Deferred<MoviesResponse>
+
+    @GET("movie/top_rated")
+    fun getTopRatedMovies(
+        @Query(AppKey.PAGE_PARAMETER) page: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+
+    ): Deferred<MoviesResponse>
 }

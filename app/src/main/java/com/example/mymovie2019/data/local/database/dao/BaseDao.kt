@@ -7,7 +7,7 @@ import androidx.room.Insert
 @Dao
 interface BaseDao<T> {
     @Insert
-    fun insertDatas(datas : List<T>): List<Long>
+    fun insertDatas(datas : List<T>)
 
     @Delete
     fun deleteData(data : T): Int

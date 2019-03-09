@@ -38,14 +38,13 @@
             tools:text="@tools:sample/date/ddmmyy"
             />
         <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small_100"
-            android:layout_marginStart="@dimen/margin_normal_100"
-            android:max="10"
-            tools:rating = "4"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            />
+                android:id="@+id/rating_bar_movie_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal_100"
+                tools:rating="5"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+        />
 
 
     </LinearLayout>

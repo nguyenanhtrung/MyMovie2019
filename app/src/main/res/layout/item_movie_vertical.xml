@@ -1,11 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/padding_normal_100"
+    android:layout_marginBottom="@dimen/margin_normal_100"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/height_image_movie_vertical">
+
+        <ImageView
+            android:id="@+id/image_movie_vertical"
+            android:layout_width="@dimen/width_image_movie_vertical"
+            android:layout_height="@dimen/height_image_movie_vertical"
+            tools:src="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/text_movie_name_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/PrimarySubTitleAppearance"
+            android:layout_toEndOf="@id/image_movie_vertical"
+            android:layout_marginStart="@dimen/margin_normal_100"
+            android:layout_marginTop="@dimen/margin_small_100"
+            android:layout_marginEnd="@dimen/margin_normal_100"
+            tools:text="@tools:sample/full_names"
+            />
+        <TextView
+            android:id="@+id/text_release_date_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/NormalSubTitleAppearance"
+            tools:text="@tools:sample/date/ddmmyy"
+            android:layout_below="@id/text_movie_name_vertical"
+            android:layout_toEndOf="@id/image_movie_vertical"
+            android:layout_alignStart="@id/text_movie_name_vertical"
+            android:layout_alignEnd="@id/text_movie_name_vertical"
+            />
+
+        <TextView
+            android:id="@+id/text_category_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/NormalSubTitleAppearance"
+            tools:text="@tools:sample/full_names"
+            android:layout_below="@id/text_release_date_vertical"
+            android:layout_toEndOf="@id/image_movie_vertical"
+            android:layout_alignStart="@id/text_movie_name_vertical"
+            android:layout_alignEnd="@id/text_movie_name_vertical"
+            />
+
+        <RatingBar
+            android:id="@+id/rating_bar_movie_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            tools:rating="4"
+            android:layout_marginBottom="@dimen/margin_normal_100"
+            android:layout_marginEnd="@dimen/margin_normal_100"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            />
+
+
+
 
     </RelativeLayout>
 

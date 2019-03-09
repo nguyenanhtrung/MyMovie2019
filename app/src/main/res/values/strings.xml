@@ -22,4 +22,6 @@
     <string name="title_revenue">Revenue:</string>
     <string name="title_homepage">Homepage:</string>
     <string name="title_watch">WATCH</string>
+    <string name="title_result">Result</string>
+    <string name="title_movie_detail">MovieDetail</string>
 </resources>

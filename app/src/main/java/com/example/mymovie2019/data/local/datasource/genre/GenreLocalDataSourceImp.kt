@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class GenreLocalDataSourceImp @Inject constructor(private val genreDao: GenreDao) : GenreLocalDataSource {
 
-    override fun saveGenres(genres: List<GenreLocal>): List<Long> {
+    override fun saveGenres(genres: List<GenreLocal>) {
         return genreDao.insertDatas(genres)
     }
 
@@ -16,7 +16,7 @@ class GenreLocalDataSourceImp @Inject constructor(private val genreDao: GenreDao
         return genreDao.getGenres(genreCategory.categoryName,offSet, limit)
     }
 
-    override fun countGenres(): Long {
-        return genreDao.countGenres()
+    override fun countMovieGenres(typeName: String): Long {
+        return genreDao.countMovieGenres(typeName)
     }
 }

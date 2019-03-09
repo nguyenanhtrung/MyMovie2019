@@ -2,53 +2,45 @@ package com.example.mymovie2019.ui.main
 
 import com.example.mymovie2019.data.local.database.entity.GenreLocal
 import com.example.mymovie2019.data.local.model.GenreCategory
-import com.example.mymovie2019.data.remote.response.Genre
 import com.example.mymovie2019.data.repository.genre.GenreRepository
 import com.example.mymovie2019.ui.base.BaseViewModel
 import com.example.mymovie2019.utils.AppKey
+import com.example.mymovie2019.utils.AppKey.Companion.EMPTY_COUNT
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val genreRepository: GenreRepository) : BaseViewModel() {
 
-    fun loadGenres() {
-        launch{
-            val countGenreLocal = withContext(Dispatchers.IO) { genreRepository.countGenres() }
-            if (countGenreLocal == 0L) {
-                //load genres from server, save to local database
-                showLoading()
-                withContext(Dispatchers.IO) {
-                    loadGenresFromServer()
-                }
-                hideLoading()
-            }
+    internal fun loadGenres() {
+        launch {
+            showLoading()
+            loadMovieGenres()
+            hideLoading()
         }
     }
 
-    private suspend fun loadGenresFromServer() {
-
-        val genresMovieResponse = genreRepository.getGenresMovieFromServer(AppKey.API_KEY).await()
-        val genresTvShowResponse = genreRepository.getGenresTvShowFromServer(AppKey.API_KEY).await()
-        val genresMovie = genresMovieResponse.genres
-        val genresTvShow = genresTvShowResponse.genres
-
-        withContext(Dispatchers.IO) {
-            saveGenresToLocal(genresMovie, GenreCategory.MOVIE)
+    private suspend fun loadMovieGenres() {
+        val genreCount = withContext(Dispatchers.IO) {
+            genreRepository.countMovieGenres(GenreCategory.MOVIE.categoryName)
         }
-        withContext(Dispatchers.IO) {
-            saveGenresToLocal(genresTvShow, GenreCategory.TV_SHOW)
+        if (genreCount == EMPTY_COUNT) {
+            val genreResponse = genreRepository.getGenresMovieFromServer(AppKey.API_KEY)
+            val genreOriginals = genreResponse.genres
+            val genreLocals = genreOriginals.map {
+                GenreLocal(it.id.toLong(), it.name, GenreCategory.MOVIE.categoryName)
+            }
+            saveGenres(genreLocals)
         }
-
     }
 
-    private fun saveGenresToLocal(genres: List<Genre>, genreCategory: GenreCategory) {
-        if (!genres.isEmpty()) {
-            val genreLocals = genres.map {
-                GenreLocal(it.id.toLong(), it.name, genreCategory.categoryName)
-            }
+    private suspend fun saveGenres(genreLocals: List<GenreLocal>) {
+        withContext(Dispatchers.IO) {
             genreRepository.saveGenres(genreLocals)
         }
+        Timber.d("Load successful")
     }
+
 }

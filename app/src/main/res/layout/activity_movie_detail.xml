@@ -1,35 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_movie_detail"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="@dimen/height_app_bar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_detail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <ImageView
+                android:id="@+id/image_movie_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/avatars" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_movie_detail"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:navigationIcon="@drawable/ic_back_24dp"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"/>
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_normal_100"
+        android:paddingTop="@dimen/padding_normal_200"
+        app:layout_anchor="@id/app_bar_movie_detail"
+        app:layout_anchorGravity="bottom">
+
+        <ImageView
+            android:id="@+id/image_movie_detail"
+            android:layout_width="@dimen/width_image_movie_vertical"
+            android:layout_height="@dimen/height_image_movie_vertical"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/text_movie_name_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal_100"
+            android:layout_marginEnd="@dimen/margin_normal_100"
+            android:textAppearance="@style/HighlightSubTitleAppearance"
+            app:layout_constraintBottom_toBottomOf="@id/image_movie_detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_movie_detail"
+            app:layout_constraintTop_toTopOf="@id/image_movie_detail"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/text_movie_categories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal_100"
+            android:textAppearance="@style/NormalSubTitleAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/text_movie_name_detail"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_name_detail"
+            tools:text="Drama, Action, Romance" />
+
+        <TextView
+            android:id="@+id/text_movie_release_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal_100"
+            android:textAppearance="@style/NormalSubTitleAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/text_movie_name_detail"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_categories"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        android:layout_marginTop="@dimen/height_image_movie_vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/layout_content_scroll_movie_detail"/>
+        <include
+            layout="@layout/layout_content_scroll_movie_detail" />
 
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>

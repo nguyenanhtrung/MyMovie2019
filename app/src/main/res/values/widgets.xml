@@ -50,5 +50,6 @@
 
     <style name="Widget.MainCardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/colorSurface</item>
+        <item name="cardCornerRadius">@dimen/card_view_radius</item>
     </style>
 </resources>

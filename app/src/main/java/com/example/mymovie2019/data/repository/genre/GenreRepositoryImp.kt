@@ -6,7 +6,6 @@ import com.example.mymovie2019.data.local.datasource.genre.GenreLocalDataSource
 import com.example.mymovie2019.data.local.model.GenreCategory
 import com.example.mymovie2019.data.remote.datasource.genre.GenreRemoteDataSource
 import com.example.mymovie2019.data.remote.response.GenreResponse
-import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 
 class GenreRepositoryImp @Inject constructor(
@@ -14,7 +13,7 @@ class GenreRepositoryImp @Inject constructor(
     private val genreLocalDataSource: GenreLocalDataSource
 ) : GenreRepository {
 
-    override fun saveGenres(genres: List<GenreLocal>): List<Long> {
+    override fun saveGenres(genres: List<GenreLocal>){
         return genreLocalDataSource.saveGenres(genres)
     }
 
@@ -22,13 +21,13 @@ class GenreRepositoryImp @Inject constructor(
         return genreLocalDataSource.getGenres(genreCategory,limit,offSet)
     }
 
-    override fun countGenres(): Long = genreLocalDataSource.countGenres()
+    override fun countMovieGenres(typeName: String): Long = genreLocalDataSource.countMovieGenres(typeName)
 
-    override fun getGenresMovieFromServer(apiKey: String): Deferred<GenreResponse> {
+    override suspend fun getGenresMovieFromServer(apiKey: String): GenreResponse {
         return genreRemoteDataSource.getGenresMovieFromServer(apiKey)
     }
 
-    override fun getGenresTvShowFromServer(apiKey: String): Deferred<GenreResponse> {
+    override suspend fun getGenresTvShowFromServer(apiKey: String): GenreResponse {
         return genreRemoteDataSource.getGenresTvShowFromServer(apiKey)
     }
 }

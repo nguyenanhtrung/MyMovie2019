@@ -9,6 +9,7 @@
         android:id="@+id/image_cast"
         android:layout_width="@dimen/width_image_cast"
         android:layout_height="@dimen/height_image_cast"
+        android:transitionName="@string/text_image_cast_transition"
         style="@style/Widget.CircleCastImage"
         tools:src="@tools:sample/avatars"
         />
@@ -18,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="@tools:sample/full_names"
+        android:transitionName="@string/text_name_cast_transition"
         style="@style/HighlightSubTitleAppearance"
         android:layout_toEndOf="@id/image_cast"
         android:layout_marginTop="@dimen/margin_small_100"

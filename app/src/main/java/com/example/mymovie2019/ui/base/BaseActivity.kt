@@ -54,7 +54,7 @@ abstract class BaseActivity : AppCompatActivity() {
     private fun subscribeErrorMessageLiveData() {
         baseViewModel.errorStateLiveData.observe(this, Observer {
             when (it) {
-                is ErrorState.NoAction -> showErrorMessageNoAction(it.message, Toast.LENGTH_SHORT)
+                is ErrorState.NoAction -> showErrorMessageNoAction(getString(it.messageId), Toast.LENGTH_SHORT)
                 is ErrorState.WithAction -> showErrorMessageWithAction(it)
             }
         })
@@ -74,8 +74,8 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private fun showErrorMessageWithAction(errorMessage: ErrorState.WithAction) {
-        Snackbar.make(getSnackBarViewGroup(), errorMessage.message, Snackbar.LENGTH_INDEFINITE)
-                .setAction(errorMessage.actionName) {
+        Snackbar.make(getSnackBarViewGroup(), getString(errorMessage.messageId), Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(errorMessage.actionNameId)) {
                     errorMessage.action()
                 }
                 .show()

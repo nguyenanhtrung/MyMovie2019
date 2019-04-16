@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_graph"
-            app:startDestination="@id/moviesFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/movies_dest">
 
 
-   <fragment android:id="@+id/moviesFragment" android:name="com.example.mymovie2019.ui.movies.MoviesFragment"
-             android:label="MoviesFragment"/>
+    <fragment
+        android:id="@+id/movies_dest"
+        android:name="com.example.mymovie2019.ui.movies.MoviesFragment"
+        android:label="MoviesFragment">
+
+        <action
+            android:id="@+id/action_movies_dest_to_movieDetailActivity"
+            app:destination="@id/movies_detail_dest"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/casts_dest"
+        android:name="com.example.mymovie2019.ui.casts.CastsFragment"
+        android:label="CastsFragment">
+        <action
+            android:id="@+id/action_casts_dest_to_cast_detail_dest"
+            app:destination="@id/cast_detail_dest"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <activity
+        android:id="@+id/movies_detail_dest"
+        android:name="com.example.mymovie2019.ui.moviedetail.MovieDetailActivity"
+        android:label="MovieDetailActivity">
+        <argument
+            android:name="MovieTransferForDetail"
+            app:argType="com.example.mymovie2019.data.local.model.MovieTransfer" />
+    </activity>
+    <activity
+        android:id="@+id/cast_detail_dest"
+        android:name="com.example.mymovie2019.ui.castdetail.CastDetailActivity"
+        android:label="CastDetailActivity">
+        <argument
+            android:name="CastTransferDetail"
+            app:argType="com.example.mymovie2019.data.local.model.CastTransfer" />
+    </activity>
 </navigation>

@@ -118,7 +118,7 @@
         android:id="@+id/title_premiere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal_100"
+        android:layout_marginTop="@dimen/margin_normal_200"
         android:text="@string/title_premiere"
         android:textAppearance="@style/NormalSubTitleAppearance"
         app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"

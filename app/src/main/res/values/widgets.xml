@@ -52,4 +52,10 @@
         <item name="cardBackgroundColor">@color/colorSurface</item>
         <item name="cardCornerRadius">@dimen/card_view_radius</item>
     </style>
+
+    <style name="Widget.MainTabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="tabIndicatorColor">@color/colorSecondary</item>
+        <item name="tabTextColor">@color/colorSecondary</item>
+    </style>
 </resources>

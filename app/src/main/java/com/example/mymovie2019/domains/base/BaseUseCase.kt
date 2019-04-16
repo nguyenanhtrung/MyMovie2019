@@ -1,12 +1,15 @@
 package com.example.mymovie2019.domains.base
 
-import androidx.lifecycle.MutableLiveData
-import com.example.mymovie2019.data.local.model.ApiResult
-import kotlinx.coroutines.*
+import com.example.mymovie2019.ui.base.UseCaseHandler
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseUseCase<in P, R> : CoroutineScope {
+
 
     private val job = Job()
 
@@ -18,22 +21,8 @@ abstract class BaseUseCase<in P, R> : CoroutineScope {
         get() = job + Dispatchers.Main + handlerException
 
 
-    operator fun invoke(parameter: P, result: MutableLiveData<Result<R>>) {
-        launch {
-            withContext(Dispatchers.IO) {
-                val response = execute(parameter)
-                result.postValue(Result.success(response))
-            }
-        }
-    }
 
-    fun callApi(parameter: P, result: MutableLiveData<ApiResult>) {
-        launch {
-            result.value = ApiResult.Loading
-            val response = execute(parameter)
-            result.value = ApiResult.Success(response)
-        }
-    }
+    internal abstract fun invoke(parameter: P, useCaseHandler: UseCaseHandler<R>)
 
 
 
@@ -45,5 +34,9 @@ abstract class BaseUseCase<in P, R> : CoroutineScope {
 
 
     protected abstract suspend fun execute(parameter: P): R
+
+    internal fun cancel() {
+        job.cancel()
+    }
 
 }

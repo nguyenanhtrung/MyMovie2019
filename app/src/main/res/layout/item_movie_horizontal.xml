@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_normal_100"
             android:layout_marginTop="@dimen/margin_normal_100"
+            android:transitionName="@string/text_movie_name_transition"
             tools:text="@tools:sample/full_names"
             style="@style/HighlightSubTitleAppearance"
             />
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/NormalSubTitleAppearance"
             android:layout_marginStart="@dimen/margin_normal_100"
+            android:transitionName="@string/text_release_date_transition"
             tools:text="@tools:sample/date/ddmmyy"
             />
         <RatingBar

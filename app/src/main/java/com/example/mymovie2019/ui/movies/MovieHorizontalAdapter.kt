@@ -15,6 +15,7 @@ import com.example.mymovie2019.data.local.model.ItemType
 import com.example.mymovie2019.data.local.model.MovieItem
 import com.example.mymovie2019.utils.AppKey
 import com.example.mymovie2019.utils.loadImageByUrl
+import java.util.*
 
 
 class MovieHorizontalAdapter(
@@ -23,7 +24,7 @@ class MovieHorizontalAdapter(
 
 
     interface OnClickMovieItem {
-        fun onItemClick(view: View?, position: Int)
+        fun onItemClick(imageView: ImageView, textName: TextView, textDate: TextView, position: Int)
     }
 
 
@@ -42,7 +43,7 @@ class MovieHorizontalAdapter(
                     R.layout.item_list_loading,
                     parent,
                     false
-                ), onItemClickListener
+                )
             )
 
             R.layout.item_loading_more -> return ItemLoadingViewHolder(
@@ -52,12 +53,10 @@ class MovieHorizontalAdapter(
                     false
                 )
             )
+            else -> throw NoSuchElementException()
         }
 
-        return MovieHorizontalViewHolder(
-            inflater.inflate(R.layout.item_movie_horizontal, parent, false),
-            onItemClickListener
-        )
+
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -66,6 +65,10 @@ class MovieHorizontalAdapter(
         }
     }
 
+
+    fun getItemByPosition(position: Int): MovieItem {
+        return getItem(position)
+    }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position).itemType) {
         ItemType.ListLoading -> R.layout.item_list_loading
@@ -91,7 +94,7 @@ class MovieHorizontalAdapter(
         }
 
         override fun onClick(p0: View?) {
-            onItemClickListener.onItemClick(p0, adapterPosition)
+            onItemClickListener.onItemClick(imageMovie, textMovieName, textReleaseDate, adapterPosition)
         }
 
         fun bindData(item: MovieItem) {
@@ -106,14 +109,7 @@ class MovieHorizontalAdapter(
     }
 
 
-    class EmptyViewHolder(itemView: View, private val onItemClickListener: OnClickMovieItem) :
-        RecyclerView.ViewHolder(itemView), View.OnClickListener {
-
-        override fun onClick(p0: View?) {
-            onItemClickListener.onItemClick(p0, adapterPosition)
-        }
-
-    }
+    class EmptyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     class ItemLoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

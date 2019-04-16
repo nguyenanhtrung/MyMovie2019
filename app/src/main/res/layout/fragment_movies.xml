@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/scroll_view_movies"
+    android:paddingBottom="@dimen/padding_normal_100"
     android:fillViewport="true"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        >
 
-        <androidx.viewpager.widget.ViewPager
+        <com.example.mymovie2019.ui.custom.MyViewPager
             android:id="@+id/view_pager_slider_image"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_slider_image"
@@ -24,9 +28,8 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/height_circle_indicator"
             app:layout_constraintBottom_toBottomOf="@id/view_pager_slider_image"
-            app:layout_constraintStart_toStartOf="@id/guideline_ver_start"
             app:layout_constraintEnd_toEndOf="@id/guideline_ver_end"
-            />
+            app:layout_constraintStart_toStartOf="@id/guideline_ver_start" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ver_start"
@@ -47,11 +50,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal_100"
-            app:layout_constraintStart_toStartOf="@id/guideline_ver_start"
             app:layout_constraintEnd_toEndOf="@id/guideline_ver_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_ver_start"
             app:layout_constraintTop_toBottomOf="@id/view_pager_slider_image"
-            tools:listitem="@layout/item_vertical_recyclerview_movies"
-            />
+            tools:listitem="@layout/item_vertical_recyclerview_movies" />
 
         <TextView
             android:id="@+id/title_categories"
@@ -64,18 +66,17 @@
             app:layout_constraintTop_toBottomOf="@+id/recycler_view_vertical_movies" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_categories"
+            android:id="@+id/recycler_view_categories"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal_100"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
-            tools:listitem="@layout/item_movie_category"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toStartOf="@+id/guideline_ver_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_ver_start"
-            app:layout_constraintTop_toBottomOf="@+id/title_categories" />
+            app:layout_constraintTop_toBottomOf="@+id/title_categories"
+            tools:listitem="@layout/item_movie_category" />
 
-g
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

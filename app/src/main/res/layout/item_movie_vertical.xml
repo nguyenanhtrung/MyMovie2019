@@ -15,6 +15,7 @@
             android:id="@+id/image_movie_vertical"
             android:layout_width="@dimen/width_image_movie_vertical"
             android:layout_height="@dimen/height_image_movie_vertical"
+            android:scaleType="fitXY"
             tools:src="@tools:sample/avatars"
             tools:ignore="ContentDescription" />
 
@@ -41,31 +42,17 @@
             android:layout_alignEnd="@id/text_movie_name_vertical"
             />
 
-        <TextView
-            android:id="@+id/text_category_movie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/NormalSubTitleAppearance"
-            tools:text="@tools:sample/full_names"
-            android:layout_below="@id/text_release_date_vertical"
-            android:layout_toEndOf="@id/image_movie_vertical"
-            android:layout_alignStart="@id/text_movie_name_vertical"
-            android:layout_alignEnd="@id/text_movie_name_vertical"
-            />
-
         <RatingBar
-            android:id="@+id/rating_bar_movie_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            tools:rating="4"
-            android:layout_marginBottom="@dimen/margin_normal_100"
-            android:layout_marginEnd="@dimen/margin_normal_100"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            />
-
-
+                android:id="@+id/rating_bar_movie_vertical"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="@dimen/margin_normal_100"
+                android:layout_marginBottom="@dimen/margin_normal_100"
+                tools:rating="4"
+                android:layout_marginStart="50dp"/>
 
 
     </RelativeLayout>

@@ -1,16 +1,16 @@
 package com.example.mymovie2019.data.local.model
 
 data class MovieItem(
-        var id: Int = -1,
-        var name: String = "",
-        var releaseDate: String = "",
-        var rating: Double = 0.0,
-        var imageUrl: String = "",
+        override var id: Int = -1,
+        override var name: String = "",
+        override var releaseDate: String = "",
+        override var rating: Double = 0.0,
+        override var imageUrl: String? = "",
         var itemType: ItemType = ItemType.Normal
-) {
+) : MovieTransferContract {
     constructor(movieItem: MovieItem) : this(movieItem.id, movieItem.name,
-                                        movieItem.releaseDate, movieItem.rating,
-                                        movieItem.imageUrl, movieItem.itemType) {
+            movieItem.releaseDate, movieItem.rating,
+            movieItem.imageUrl, movieItem.itemType) {
         id = movieItem.id
         name = movieItem.name
         releaseDate = movieItem.releaseDate

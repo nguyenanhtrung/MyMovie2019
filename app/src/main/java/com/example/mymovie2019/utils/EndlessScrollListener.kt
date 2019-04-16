@@ -61,7 +61,7 @@ abstract class EndlessScrollListener : RecyclerView.OnScrollListener {
             // get maximum element within the list
             lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
         } else if (mLayoutManager is GridLayoutManager) {
-            lastVisibleItemPosition = (mLayoutManager as GridLayoutManager).findLastVisibleItemPosition()
+            lastVisibleItemPosition = (mLayoutManager as GridLayoutManager).findLastCompletelyVisibleItemPosition()
         } else if (mLayoutManager is LinearLayoutManager) {
             lastVisibleItemPosition = (mLayoutManager as LinearLayoutManager).findLastVisibleItemPosition()
         }
@@ -89,7 +89,11 @@ abstract class EndlessScrollListener : RecyclerView.OnScrollListener {
         // the visibleThreshold and need to reload more data.
         // If we do need to reload some more data, we execute onLoadMore to fetch the data.
         // threshold should reflect how many total columns there are too
-        if (dx == 0) {
+        if (mLayoutManager.canScrollHorizontally() && dx == 0) {
+            return
+        }
+
+        if (mLayoutManager.canScrollVertically() && dy == 0) {
             return
         }
 

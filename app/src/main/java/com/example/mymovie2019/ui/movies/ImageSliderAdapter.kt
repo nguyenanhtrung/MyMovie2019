@@ -8,14 +8,27 @@ import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.example.mymovie2019.R
 import com.example.mymovie2019.data.local.model.MovieItem
+import com.example.mymovie2019.data.local.model.MovieTransfer
 import com.example.mymovie2019.utils.AppKey
 import com.example.mymovie2019.utils.loadImageByUrl
 
-class ImageSliderAdapter(private val context: Context, private val sliderImages: List<MovieItem>) : PagerAdapter() {
+class ImageSliderAdapter(private val context: Context,
+                         private val sliderImages: List<MovieItem>,
+                         private val onClickMovieSliderItemListener: OnClickMovieSliderItemListener) : PagerAdapter() {
+
+    interface OnClickMovieSliderItemListener {
+        fun onClickMovieSliderItem(view: ImageView, movieTransfer: MovieTransfer)
+    }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(context).inflate(R.layout.item_image_slider, container, false)
         val imageView = view.findViewById<ImageView>(R.id.image_view_slide)
+        imageView.apply {
+            setOnClickListener {
+                val movieTransfer = MovieTransfer(sliderImages[position])
+                onClickMovieSliderItemListener.onClickMovieSliderItem(this, movieTransfer)
+            }
+        }
         val sliderImageItem = sliderImages[position]
         imageView.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}${sliderImageItem.imageUrl}")
         container.addView(view,0)

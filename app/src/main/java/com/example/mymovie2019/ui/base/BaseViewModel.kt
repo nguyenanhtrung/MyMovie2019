@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel : ViewModel(), CoroutineScope {
+abstract class BaseViewModel : ViewModel(), CoroutineScope, InteractionWithUICallback {
 
     private val job: Job = Job()
     private val handlerException = CoroutineExceptionHandler { _, throwable ->
@@ -36,19 +36,17 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
     val errorStateLiveData: LiveData<ErrorState>
         get() = _errorStateLiveData
 
-     fun showLoading() {
+    override fun showLoading() {
         _loadingLiveData.value = LoadingState.Show
     }
 
-     fun hideLoading() {
+    override fun hideLoading() {
         _loadingLiveData.value = LoadingState.Hide
     }
 
-    internal fun showError(errorState: ErrorState) {
+    override fun showError(errorState: ErrorState) {
         _errorStateLiveData.value = errorState
     }
-
-
 
 
 

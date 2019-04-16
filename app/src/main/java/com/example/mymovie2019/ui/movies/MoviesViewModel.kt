@@ -2,24 +2,27 @@ package com.example.mymovie2019.ui.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mymovie2019.data.local.model.ItemType
-import com.example.mymovie2019.data.local.model.MovieItem
-import com.example.mymovie2019.data.local.model.MovieType
-import com.example.mymovie2019.data.local.model.MoviesVerticalItem
+import com.example.mymovie2019.data.local.database.entity.GenreLocal
+import com.example.mymovie2019.data.local.model.*
 import com.example.mymovie2019.data.remote.response.MovieRemote
 import com.example.mymovie2019.data.remote.response.MoviesResponse
+import com.example.mymovie2019.data.repository.genre.GenreRepository
 import com.example.mymovie2019.data.repository.movie.MovieRepository
 import com.example.mymovie2019.ui.base.BaseViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 import kotlin.concurrent.schedule
 
-class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepository) : BaseViewModel() {
+class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepository,
+                                          private val genreRepository: GenreRepository) : BaseViewModel() {
 
     companion object {
         private const val NUMBER_OF_ITEM_SLIDER = 4
-        private const val TIME_SLIDE_POPULAR_MOVIE: Long = 3000
+        private const val TIME_SLIDE_POPULAR_MOVIE: Long = 4000
     }
 
     private val _moviesTypeLiveData by lazy {
@@ -40,6 +43,20 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
     internal val pageSliderMovieLiveData: LiveData<Int>
         get() = _pageSliderMovieLiveData
 
+    private lateinit var timerSliderMovie: TimerTask
+
+    private val _genresLiveData by lazy {
+        MutableLiveData<MutableList<GenreLocal>>()
+    }
+    internal val genresLiveData: LiveData<MutableList<GenreLocal>>
+        get() = _genresLiveData
+
+    private val _navigateDetailLiveData by lazy {
+        MutableLiveData<Event<MovieTransfer>>()
+    }
+    internal val navigateDetailLiveData: LiveData<Event<MovieTransfer>>
+        get() = _navigateDetailLiveData
+
     private var popularMoviePage = 1
     private var upComingMoviePage = 1
     private var topRatedMoviePage = 1
@@ -53,6 +70,10 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
 
     }
 
+    fun onClickMovieItem(movieTransfer: MovieTransfer) {
+        _navigateDetailLiveData.value = Event(movieTransfer)
+    }
+
     fun loadAllMovies() {
         launch {
             val popularMovieResponse = movieRepository.getMoviesAsync(popularMoviePage, MovieType.POPULAR)
@@ -63,6 +84,7 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
             loadMovies(upComingMovieResponse.await(), MovieType.UPCOMING.ordinal)
             loadMovies(topRatedMovieResponse.await(), MovieType.TOP_RATED.ordinal)
 
+            delay(2000)
             startPopularMoviesSlider()
         }
     }
@@ -129,8 +151,8 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
 
     fun onLoadMoreMovies(page: Int, listPosition: Int) {
         val movieType = MovieType.getTypeByValue(listPosition)
-        updatePage(page, movieType)
-        loadMoreMovies(popularMoviePage, movieType)
+        val newPageByType = updatePage(page, movieType)
+        loadMoreMovies(newPageByType, movieType)
     }
 
     private fun loadMoreMovies(page: Int, movieType: MovieType) {
@@ -145,7 +167,7 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
     }
 
     private fun mapToMovieItems(movieRemotes: List<MovieRemote>) = movieRemotes.map {
-        MovieItem(it.id, it.title, it.releaseDate, it.voteAverage, it.posterPath)
+        MovieItem(it.id, it.name, it.releaseDate, it.rating, it.imageUrl)
     }
 
     private fun getMovieItemsByType(movieType: MovieType): List<MovieItem> {
@@ -160,7 +182,7 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
             .take(NUMBER_OF_ITEM_SLIDER)
     }
 
-    fun startPopularMoviesSlider() {
+    private fun startPopularMoviesSlider() {
         showSliderMovieImage()
         slideMovieImagesByTimer()
     }
@@ -172,7 +194,7 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
 
     private fun slideMovieImagesByTimer() {
 
-        Timer().schedule(TIME_SLIDE_POPULAR_MOVIE, TIME_SLIDE_POPULAR_MOVIE) {
+        timerSliderMovie = Timer().schedule(TIME_SLIDE_POPULAR_MOVIE, TIME_SLIDE_POPULAR_MOVIE) {
             if (_pageSliderMovieLiveData.value == null) {
                 _pageSliderMovieLiveData.postValue(0)
             } else {
@@ -183,6 +205,24 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
                     _pageSliderMovieLiveData.postValue(currentPage + 1)
                 }
             }
+        }
+
+    }
+
+    fun onScrollViewEvent(sliderHeight: Int,scrollY: Int, oldScrollY: Int) {
+        if (scrollY > sliderHeight) {
+            timerSliderMovie.cancel()
+        } else if (scrollY == 0 && oldScrollY != 0) {
+            slideMovieImagesByTimer()
+        }
+    }
+
+    fun loadGenreMovies() {
+        launch {
+            val genres = withContext(Dispatchers.IO) {
+                genreRepository.getGenres(GenreCategory.MOVIE)
+            }
+            _genresLiveData.value = genres
         }
     }
 }

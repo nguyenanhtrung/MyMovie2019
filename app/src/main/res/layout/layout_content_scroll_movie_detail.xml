@@ -1,19 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout_movie_detail"
+    <TextView
+        android:id="@+id/text_overview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_normal_100"
+        android:layout_marginEnd="@dimen/margin_normal_100"
+        android:textAppearance="@style/MultilineTextAppearance"
+        tools:text="@sample/paragraph"
+        />
 
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_movie_detail"
+    <TextView
+        android:id="@+id/title_casts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_100"
+        style="@style/Widget.HighlightBackgroundText"
+        android:text="@string/title_cast_list"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_cast_movie_detail"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="@dimen/margin_normal_100"
+        tools:listitem="@layout/item_cast_vertical"
+        />
+
+    <TextView
+        android:id="@+id/title_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_100"
+        style="@style/Widget.HighlightBackgroundText"
+        android:text="@string/title_detail"
+        />
+
+    <include layout="@layout/layout_movie_info_detail"/>
 
 </LinearLayout>

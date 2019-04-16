@@ -1,10 +1,10 @@
 package com.example.mymovie2019.data.remote.service
 
-import com.example.mymovie2019.data.remote.response.GenreResponse
-import com.example.mymovie2019.data.remote.response.MoviesResponse
+import com.example.mymovie2019.data.remote.response.*
 import com.example.mymovie2019.utils.AppKey
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -34,4 +34,30 @@ interface ApiService {
         @Query(AppKey.API_KEY_PARAMETER) apiKey: String
 
     ): Deferred<MoviesResponse>
+
+    @GET("person/popular")
+    fun getPopularCasts(
+        @Query(AppKey.PAGE_PARAMETER) page: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+    ): Deferred<CastsResponse>
+
+    @GET("movie/{movie_id}")
+    fun getMovieDetailAsync(@Path("movie_id") movieId: Int,
+                            @Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<MovieDetailResponse>
+
+    @GET("movie/{movie_id}/credits")
+    fun getCreditMovieAsync(@Path("movie_id") movieId: Int,
+                            @Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<MovieCreditResponse>
+
+    @GET("person/{person_id}/tv_credits")
+    fun getTvShowsOfCastAsync(
+        @Path("person_id") castId: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+    ): Deferred<CastTvShowResponse>
+
+    @GET("person/{person_id}/movie_credits")
+    fun getMoviesOfCastAsync(
+        @Path("person_id") castId: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+    ): Deferred<CastMovieResponse>
 }

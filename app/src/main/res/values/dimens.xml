@@ -38,5 +38,8 @@
     <dimen name="height_app_bar">200dp</dimen>
     <dimen name="width_image_cast_detail">100dp</dimen>
     <dimen name="height_image_cast_detail">100dp</dimen>
+    <dimen name="padding_top_content_scrolling">166dp</dimen>
+    <dimen name="padding_top_layout_image_detail">72dp</dimen>
+    <dimen name="height_toolbar">56dp</dimen>
 
 </resources>

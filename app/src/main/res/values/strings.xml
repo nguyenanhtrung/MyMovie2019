@@ -24,4 +24,14 @@
     <string name="title_watch">WATCH</string>
     <string name="title_result">Result</string>
     <string name="title_movie_detail">MovieDetail</string>
+    <string name="image_movie_transition_name">image_movie</string>
+    <string name="text_movie_name_transition">text_movie_name</string>
+    <string name="text_release_date_transition">text_release_date</string>
+    <string name="title_tab_information">INFO</string>
+    <string name="title_tab_video">VIDEOS</string>
+    <string name="title_tab_similar">SIMILAR</string>
+    <string name="text_name_cast_transition">cast_name</string>
+    <string name="text_image_cast_transition">cast_image</string>
+    <string name="error_network_call">Error network call</string>
+    <string name="error_time_out">Timeout! Cannot connect to server</string>
 </resources>

@@ -5,7 +5,6 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.R
@@ -22,9 +21,6 @@ class MainActivity : BaseActivity() {
         ViewModelProviders.of(this,viewModelFactory)[MainViewModel::class.java]
     }
 
-    private val appBarConfiguration by lazy {
-        AppBarConfiguration(findNavController(R.id.fragment_host).graph)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +38,14 @@ class MainActivity : BaseActivity() {
 
     private fun setupBottomNavView() {
         bottom_nav_bar.setupWithNavController(findNavController(R.id.fragment_host))
+        bottom_nav_bar.setOnNavigationItemReselectedListener {
+
+        }
     }
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        toolbar.setupWithNavController(findNavController(R.id.fragment_host),appBarConfiguration)
+        toolbar.navigationIcon = null
     }
 
     override fun createViewModel(): BaseViewModel = mainViewModel

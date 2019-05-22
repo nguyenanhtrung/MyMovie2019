@@ -9,13 +9,13 @@ import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.R
 import com.example.mymovie2019.data.local.model.CastTransfer
 import com.example.mymovie2019.data.local.model.MovieAbout
 import com.example.mymovie2019.data.local.model.MovieDetail
+import com.example.mymovie2019.data.local.model.MovieTransfer
 import com.example.mymovie2019.data.remote.response.Cast
 import com.example.mymovie2019.ui.base.BaseActivity
 import com.example.mymovie2019.ui.base.BaseViewModel
@@ -32,7 +32,10 @@ import javax.inject.Inject
 
 class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastItemListener {
 
-    private val args: MovieDetailActivityArgs by navArgs()
+    companion object {
+        const val BUNDLE_MOVIE_DETAIL = "BundleMovieDetail"
+    }
+
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -60,6 +63,16 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
         setupUiEvents()
 
 
+    }
+
+    private fun onReceivedData() {
+
+        val receiverIntent = intent
+        val movieDetail: MovieTransfer = receiverIntent.getParcelableExtra(BUNDLE_MOVIE_DETAIL)
+        movieDetailViewModel.movieId = movieDetail.id
+        showImageMovie(movieDetail.imagePath)
+        showMovieName(movieDetail.name)
+        showMovieReleaseDate(movieDetail.releaseDate)
     }
 
     private fun setupUiComponents() {
@@ -196,13 +209,7 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
         image_movie_poster.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}$imageUrl")
     }
 
-    private fun onReceivedData() {
-        val movieItem = args.MovieTransferForDetail
-        movieDetailViewModel.movieId = movieItem.id
-        showImageMovie(movieItem.imagePath)
-        showMovieName(movieItem.name)
-        showMovieReleaseDate(movieItem.releaseDate)
-    }
+
 
     private fun showMovieReleaseDate(releaseDate: String) {
         text_movie_release_date.text = releaseDate

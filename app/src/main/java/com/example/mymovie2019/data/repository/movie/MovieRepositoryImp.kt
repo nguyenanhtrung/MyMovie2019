@@ -12,8 +12,8 @@ import javax.inject.Inject
 class MovieRepositoryImp @Inject constructor(private val movieRemoteDataSource: MovieRemoteDataSource,
                                              private val movieLocalDataSource: MovieLocalDataSource) : MovieRepository {
 
-    override fun getMoviesAsync(page: Int, movieType: MovieType): Deferred<MoviesResponse> {
-        return movieRemoteDataSource.getMoviesAsync(page,movieType)
+    override suspend fun getMoviesAsync(page: Int, movieType: MovieType): MoviesResponse {
+       return movieRemoteDataSource.getMoviesAsync(page, movieType)
     }
 
     override fun getMoviesTypeVerticalItems(): MutableList<MoviesVerticalItem> {
@@ -34,5 +34,21 @@ class MovieRepositoryImp @Inject constructor(private val movieRemoteDataSource: 
 
     override fun getMovieTransfers(movieTransContracts: List<MovieTransferContract>): MutableList<MovieTransfer> {
         return movieLocalDataSource.getMovieTransfers(movieTransContracts)
+    }
+
+    override fun saveMovies(movieEntities: List<MovieEntity>) {
+       return movieLocalDataSource.saveMovies(movieEntities)
+    }
+
+    override fun getMovies(page: Int,movieType: MovieType): MutableList<MovieEntity> {
+        return movieLocalDataSource.getMovies(page, movieType)
+    }
+
+    override fun countMovieEntities(page: Int, movieType: MovieType): Long {
+        return movieLocalDataSource.countMovieEntities(page, movieType)
+    }
+
+    override fun getMoviesSortByRating(offset: Int, movieType: MovieType): List<MovieEntity> {
+        return movieLocalDataSource.getMoviesSortByRating(offset, movieType)
     }
 }

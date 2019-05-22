@@ -7,7 +7,8 @@ import com.example.mymovie2019.data.remote.response.MoviesResponse
 import kotlinx.coroutines.Deferred
 
 interface MovieRemoteDataSource {
-     fun getMoviesAsync(page: Int, movieType: MovieType): Deferred<MoviesResponse>
+
+     suspend fun getMoviesAsync(page: Int, movieType: MovieType): MoviesResponse
 
      fun getMovieDetailAsync(movieId: Int): Deferred<MovieDetailResponse>
 

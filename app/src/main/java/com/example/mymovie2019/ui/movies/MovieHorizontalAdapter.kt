@@ -100,8 +100,10 @@ class MovieHorizontalAdapter(
         fun bindData(item: MovieItem) {
             textMovieName.text = item.name
             textReleaseDate.text = item.releaseDate
-            val imageUrl = "${AppKey.BASE_URL_IMAGE_PATH}${item.imageUrl}"
-            imageMovie.loadImageByUrl(imageUrl)
+            if (!item.imageUrl.isNullOrEmpty()) {
+                val imageUrl = "${AppKey.BASE_URL_IMAGE_PATH}${item.imageUrl}"
+                imageMovie.loadImageByUrl(imageUrl)
+            }
             val movieRating = item.rating.toFloat()
             ratingMovie.rating = movieRating / 2
 

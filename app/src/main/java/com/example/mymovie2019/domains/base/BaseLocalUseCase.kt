@@ -1,15 +1,18 @@
 package com.example.mymovie2019.domains.base
 
-import com.example.mymovie2019.ui.base.UseCaseHandler
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-abstract class BaseLocalUseCase<P, R> : BaseUseCase<P,R>() {
+abstract class BaseLocalUseCase<in P, R>(private val uiScope: CoroutineScope) {
 
-    override fun invoke(parameter: P, useCaseHandler: UseCaseHandler<R>) {
-        launch {
-            val result = execute(parameter)
-            useCaseHandler.onSuccess(result)
-        }
-    }
+
+    operator fun invoke(parameter: P, onCompleted: (R) -> Unit) {
+         uiScope.launch {
+             val result = execute(parameter)
+             onCompleted(result)
+         }
+     }
+
+    protected abstract suspend fun execute(parameter: P): R
 
 }

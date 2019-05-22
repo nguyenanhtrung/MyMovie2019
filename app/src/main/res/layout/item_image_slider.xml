@@ -10,7 +10,7 @@
         android:layout_height="@dimen/height_slider_image"
         android:transitionName="@string/image_movie_transition_name"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         tools:src = "@tools:sample/backgrounds/scenic"
         />
 

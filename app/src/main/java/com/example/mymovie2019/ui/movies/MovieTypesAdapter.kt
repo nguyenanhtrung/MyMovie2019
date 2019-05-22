@@ -53,7 +53,6 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
                     adapter = MovieHorizontalAdapter(this@MovieTypesViewHolder)
                     addOnScrollListener(object : EndlessScrollListener(layoutManager as LinearLayoutManager) {
                         override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-
                             onLoadMoreMovieItemListener.onLoadMoreMovie(page,adapterPosition)
                         }
 
@@ -66,7 +65,6 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
 
         fun bindData(item: MoviesVerticalItem) {
             textTitle.text = item.title
-
             val adapter = recyclerViewMovies.adapter as MovieHorizontalAdapter
             adapter.submitList(item.movieItems)
 
@@ -77,7 +75,7 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
             val movieHorizontalAdapter = recyclerViewMovies.adapter as MovieHorizontalAdapter
             val movieItem = movieHorizontalAdapter.getItemByPosition(position)
             val movieTransfer = MovieTransfer(movieItem)
-            onClickMovieItem.onItemMovieLick(movieTransfer)
+            onClickMovieItem.onItemMovieLick(movieTransfer, imageView, textName, textDate)
         }
     }
 
@@ -97,7 +95,7 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
     }
 
     interface OnClickItemMovieHorizontalListener {
-        fun onItemMovieLick(movieTransfer: MovieTransfer)
+        fun onItemMovieLick(movieTransfer: MovieTransfer, imageView: ImageView, textName: TextView, textDate: TextView)
     }
 
 }

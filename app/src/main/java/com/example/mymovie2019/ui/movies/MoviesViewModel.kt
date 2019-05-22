@@ -4,25 +4,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mymovie2019.data.local.database.entity.GenreLocal
 import com.example.mymovie2019.data.local.model.*
-import com.example.mymovie2019.data.remote.response.MovieRemote
-import com.example.mymovie2019.data.remote.response.MoviesResponse
 import com.example.mymovie2019.data.repository.genre.GenreRepository
 import com.example.mymovie2019.data.repository.movie.MovieRepository
+import com.example.mymovie2019.domains.movies.GetMoviesUseCase
+import com.example.mymovie2019.domains.movies.GetSliderPopularMoviesUseCase
 import com.example.mymovie2019.ui.base.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 import kotlin.concurrent.schedule
 
-class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepository,
-                                          private val genreRepository: GenreRepository) : BaseViewModel() {
+class MoviesViewModel @Inject constructor(
+    private val movieRepository: MovieRepository,
+    private val genreRepository: GenreRepository
+) : BaseViewModel() {
 
     companion object {
         private const val NUMBER_OF_ITEM_SLIDER = 4
         private const val TIME_SLIDE_POPULAR_MOVIE: Long = 4000
+        private const val DELAY_TIME_LOAD_MORE = 500L
+    }
+
+    private val getMoviesUseCase by lazy {
+        GetMoviesUseCase(this, movieRepository, this)
+    }
+
+    private val getSliderMoviesUsecase by lazy {
+        GetSliderPopularMoviesUseCase(this, movieRepository)
     }
 
     private val _moviesTypeLiveData by lazy {
@@ -63,11 +72,8 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
 
 
     fun showListMoviesType() {
-        launch {
-            val moviesType = movieRepository.getMoviesTypeVerticalItems()
-            _moviesTypeLiveData.value = moviesType
-        }
-
+        val moviesType = movieRepository.getMoviesTypeVerticalItems()
+        _moviesTypeLiveData.value = moviesType
     }
 
     fun onClickMovieItem(movieTransfer: MovieTransfer) {
@@ -75,29 +81,29 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
     }
 
     fun loadAllMovies() {
-        launch {
-            val popularMovieResponse = movieRepository.getMoviesAsync(popularMoviePage, MovieType.POPULAR)
-            val upComingMovieResponse = movieRepository.getMoviesAsync(upComingMoviePage, MovieType.UPCOMING)
-            val topRatedMovieResponse = movieRepository.getMoviesAsync(topRatedMoviePage, MovieType.TOP_RATED)
-
-            loadMovies(popularMovieResponse.await(), MovieType.POPULAR.ordinal)
-            loadMovies(upComingMovieResponse.await(), MovieType.UPCOMING.ordinal)
-            loadMovies(topRatedMovieResponse.await(), MovieType.TOP_RATED.ordinal)
-
-            delay(2000)
+        loadMovieByType(popularMoviePage, MovieType.POPULAR) {
             startPopularMoviesSlider()
+            showMovies(it.toMutableList(), MovieType.POPULAR)
         }
+        loadMovieByType(topRatedMoviePage, MovieType.TOP_RATED) {
+            showMovies(it.toMutableList(), MovieType.TOP_RATED)
+        }
+        loadMovieByType(upComingMoviePage, MovieType.UPCOMING) {
+            showMovies(it.toMutableList(), MovieType.UPCOMING)
+        }
+
     }
 
-    private fun loadMovies(moviesResponse: MoviesResponse?, movieTypeIndex: Int) {
-        moviesResponse?.let {
-            val movieRemotes = moviesResponse.movieRemotes
-            val movieItems = mapToMovieItems(movieRemotes)
-            val movieTypesCopy = getMovieVerticalItemsCopy()
-            movieTypesCopy[movieTypeIndex].movieItems.removeAt(0)
-            movieTypesCopy[movieTypeIndex].movieItems.addAll(movieItems)
-            _moviesTypeLiveData.value = movieTypesCopy
-        }
+    private fun loadMovieByType(page: Int, movieType: MovieType, onCompleted: (List<MovieItem>) -> Unit) {
+        getMoviesUseCase.invoke(Pair(page, movieType), onCompleted)
+    }
+
+    private fun showMovies(movieItems: MutableList<MovieItem>, movieType: MovieType) {
+        val movieTypesCopy = getMovieVerticalItemsCopy()
+        movieTypesCopy[movieType.ordinal].movieItems.removeAt(0)
+        movieTypesCopy[movieType.ordinal].movieItems.addAll(movieItems)
+        _moviesTypeLiveData.value = movieTypesCopy
+
     }
 
     private fun getMovieVerticalItemsCopy(): MutableList<MoviesVerticalItem> {
@@ -114,6 +120,9 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
         val moviesTypesCopy = getMovieVerticalItemsCopy()
         val moviesTypeItemCopy = moviesTypesCopy[movieType.ordinal]
         val movieItems = moviesTypeItemCopy.movieItems
+        if (movieItems[movieItems.size - 1].itemType == ItemType.ItemLoading) {
+            return
+        }
         movieItems.add(MovieItem(itemType = ItemType.ItemLoading))
         _moviesTypeLiveData.value = moviesTypesCopy
     }
@@ -136,15 +145,15 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
 
     private fun updatePage(page: Int, movieType: MovieType) = when (movieType) {
         MovieType.POPULAR -> {
-            popularMoviePage = page + 1
+            popularMoviePage++
             popularMoviePage
         }
         MovieType.UPCOMING -> {
-            upComingMoviePage = page + 1
+            upComingMoviePage++
             upComingMoviePage
         }
         MovieType.TOP_RATED -> {
-            topRatedMoviePage = page + 1
+            topRatedMoviePage++
             topRatedMoviePage
         }
     }
@@ -158,28 +167,13 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
     private fun loadMoreMovies(page: Int, movieType: MovieType) {
         launch {
             showLoadingMoreMovies(movieType)
-            val moviesResponse = movieRepository.getMoviesAsync(page, movieType).await()
-            val movieRemotes = moviesResponse.movieRemotes
-            val movieItems = mapToMovieItems(movieRemotes)
-            hideLoadingMoreMovies(movieType)
-            addAllMovies(movieItems, movieType)
+            delay(DELAY_TIME_LOAD_MORE)
+            getMoviesUseCase.invoke(Pair(page, movieType)) {
+                hideLoadingMoreMovies(movieType)
+                addAllMovies(it, movieType)
+            }
         }
-    }
 
-    private fun mapToMovieItems(movieRemotes: List<MovieRemote>) = movieRemotes.map {
-        MovieItem(it.id, it.name, it.releaseDate, it.rating, it.imageUrl)
-    }
-
-    private fun getMovieItemsByType(movieType: MovieType): List<MovieItem> {
-        val movieTypeItems = _moviesTypeLiveData.value ?: return emptyList()
-        val movieTypeItem = movieTypeItems[movieType.ordinal]
-        return movieTypeItem.movieItems
-    }
-
-    private fun getPopularMoviesForSlider(): List<MovieItem> {
-        val popularMovies = getMovieItemsByType(MovieType.POPULAR)
-        return popularMovies.sortedByDescending { it.rating }
-            .take(NUMBER_OF_ITEM_SLIDER)
     }
 
     private fun startPopularMoviesSlider() {
@@ -188,8 +182,9 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
     }
 
     private fun showSliderMovieImage() {
-        val movieItems = getPopularMoviesForSlider()
-        _sliderMoviesLiveData.value = movieItems
+        getSliderMoviesUsecase.invoke(MovieType.POPULAR) {
+            _sliderMoviesLiveData.value = it
+        }
     }
 
     private fun slideMovieImagesByTimer() {
@@ -209,7 +204,7 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
 
     }
 
-    fun onScrollViewEvent(sliderHeight: Int,scrollY: Int, oldScrollY: Int) {
+    fun onScrollViewEvent(sliderHeight: Int, scrollY: Int, oldScrollY: Int) {
         if (scrollY > sliderHeight) {
             timerSliderMovie.cancel()
         } else if (scrollY == 0 && oldScrollY != 0) {
@@ -217,12 +212,4 @@ class MoviesViewModel @Inject constructor(private val movieRepository: MovieRepo
         }
     }
 
-    fun loadGenreMovies() {
-        launch {
-            val genres = withContext(Dispatchers.IO) {
-                genreRepository.getGenres(GenreCategory.MOVIE)
-            }
-            _genresLiveData.value = genres
-        }
-    }
 }

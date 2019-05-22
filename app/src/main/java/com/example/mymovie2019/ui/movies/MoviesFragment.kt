@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.lifecycle.Observer
@@ -19,6 +20,7 @@ import com.example.mymovie2019.ui.base.BaseFragment
 import com.example.mymovie2019.ui.base.BaseViewModel
 import com.example.mymovie2019.ui.main.MainViewModel
 import com.example.mymovie2019.ui.moviedetail.MovieDetailActivity
+import com.example.mymovie2019.ui.moviedetail.MovieDetailActivity.Companion.BUNDLE_MOVIE_DETAIL
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
 
@@ -27,6 +29,8 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     ImageSliderAdapter.OnClickMovieSliderItemListener,
     MovieTypesAdapter.OnClickItemMovieHorizontalListener,
     MovieGenresAdapter.OnClickGenreItemListener{
+
+
 
 
     @Inject
@@ -53,12 +57,10 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     override fun createFragmentViewModel(): BaseViewModel = moviesViewModel
     override fun bindActivityViewModel(): BaseViewModel = activityViewModel
 
-    override fun setupBundle() {
-
-    }
+    override fun setupBundle(){}
 
     override fun inflateLayout(inflater: LayoutInflater, container: ViewGroup?): View {
-        return inflater.inflate(com.example.mymovie2019.R.layout.fragment_movies, container, false)
+        return inflater.inflate(R.layout.fragment_movies, container, false)
     }
 
     override fun setupUIComponents() {
@@ -101,7 +103,6 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
         }
         recycler_view_vertical_movies.layoutManager = linearLayoutManager
 
-
         if (!::moviesTypeAdapter.isInitialized) {
             moviesTypeAdapter = MovieTypesAdapter(this@MoviesFragment, this)
         }
@@ -114,22 +115,11 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
         subscribeSliderMovies()
         subscribePageMovieSlider()
         subscribeGenreMovies()
-        subscribeNavigateToMovieDetail()
 
-        moviesViewModel.loadGenreMovies()
         moviesViewModel.showListMoviesType()
         moviesViewModel.loadAllMovies()
 
     }
-
-    private fun subscribeNavigateToMovieDetail() {
-        moviesViewModel.navigateDetailLiveData.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {
-
-            }
-        })
-    }
-
 
     private fun setupScrollViewEvent() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -157,6 +147,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
 
     override fun onClickMovieSliderItem(view: ImageView, movieTransfer: MovieTransfer) {
         val imagePair = Pair<View,String>(view, getString(R.string.image_movie_transition_name))
+        openMovieDetailWithShareElementTransition(movieTransfer, imagePair)
     }
 
 
@@ -171,22 +162,24 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     }
 
     override fun onItemMovieLick(
-        movieTransfer: MovieTransfer
-    ) {
-//        val imagePair = Pair<View,String>(image,getString(R.string.image_movie_transition_name))
-//        val textNamePair = Pair<View,String>(textName,getString(R.string.text_movie_name_transition))
-//        val textDatePair = Pair<View,String>(textDate, getString(R.string.text_release_date_transition))
-//
-//        openMovieDetailWithSharedTransition(movieTransfer, imagePair, textNamePair, textDatePair)
-        moviesViewModel.onClickMovieItem(movieTransfer)
+        movieTransfer: MovieTransfer,
+        imageView: ImageView,
+        textName: TextView,
+        textDate: TextView
+        ) {
+        val imagePair = Pair<View,String>(imageView,getString(R.string.image_movie_transition_name))
+        val textNamePair = Pair<View,String>(textName,getString(R.string.text_movie_name_transition))
+        val textDatePair = Pair<View,String>(textDate, getString(R.string.text_release_date_transition))
+        openMovieDetailWithShareElementTransition(movieTransfer, imagePair,textNamePair, textDatePair)
     }
 
-    private fun openMovieDetailWithSharedTransition(
+    private fun openMovieDetailWithShareElementTransition(
         movieTransfer: MovieTransfer,
         vararg shareViewPairs: Pair<View, String>
     ) {
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *shareViewPairs);
         val intent = Intent(requireActivity(), MovieDetailActivity::class.java)
-        intent.putExtra()
+        intent.putExtra(MovieDetailActivity.BUNDLE_MOVIE_DETAIL, movieTransfer)
+        startActivity(intent, options.toBundle())
     }
 }

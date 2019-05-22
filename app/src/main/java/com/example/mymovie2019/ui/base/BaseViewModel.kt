@@ -41,7 +41,10 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope, InteractionWithUICal
     }
 
     override fun hideLoading() {
-        _loadingLiveData.value = LoadingState.Hide
+        val loadingState = _loadingLiveData.value
+        if (loadingState == LoadingState.Show) {
+            _loadingLiveData.value = LoadingState.Hide
+        }
     }
 
     override fun showError(errorState: ErrorState) {

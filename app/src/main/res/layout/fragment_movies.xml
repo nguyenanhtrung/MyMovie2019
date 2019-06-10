@@ -16,12 +16,14 @@
         >
 
         <com.example.mymovie2019.ui.custom.MyViewPager
-            android:id="@+id/view_pager_slider_image"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_slider_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/view_pager_slider_image"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_slider_image"
+                android:layout_marginStart="@dimen/margin_normal_100"
+                android:layout_marginEnd="@dimen/margin_normal_100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"/>
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/circle_indicator"

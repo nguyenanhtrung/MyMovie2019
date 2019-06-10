@@ -1,19 +1,19 @@
 <resources>
-    <color name="colorPrimary">#252c3e</color>
-    <color name="colorPrimaryDark">#252c3e</color>
-    <color name="colorSecondary">#fff176</color>
-    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#F4F4F5</color>
+    <color name="colorSecondary">#CC3F51B5</color>
+    <color name="colorOnPrimary">#000000</color>
     <color name="colorOnSecondary">#000000</color>
-    <color name="colorSurface">#455270</color>
-    <color name="colorOnSurface">#FFFFFF</color>
-    <color name="colorBackground">#252c3e</color>
-    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorSurface">#fefeff</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color>
     <color name="colorError">#e57373</color>
     <color name="colorOnError">#FFFFFF</color>
 
-    <color name="colorPrimaryText">#FFFFFF</color>
-    <color name="colorSecondaryText">#fff176</color>
-    <color name="colorMediumText">#979797</color>
+    <color name="colorPrimaryText">#000000</color>
+    <color name="colorSecondaryText">@color/colorSecondary</color>
+    <color name="colorMediumText">#424141</color>
 
-    <color name="colorStateNormal">#99FFFFFF</color>
+    <color name="colorStateNormal">#DEDEDE</color>
 </resources>

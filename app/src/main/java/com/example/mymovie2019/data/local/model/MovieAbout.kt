@@ -14,7 +14,7 @@ data class MovieAbout(
     val category: List<Genre>? = listOf(),
     val premiere: String? = "",
     val budget: Int? = 0,
-    val revenue: Int? = 0,
+    val revenue: Long? = 0,
     val homePage: String? = "",
     val casts: List<Cast>? = listOf()
 ): Parcelable

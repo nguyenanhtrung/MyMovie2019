@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/margin_normal_100"
-    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_marginEnd="@dimen/margin_normal_100"
+              android:orientation="vertical"
+>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/padding_normal_100"
-        android:orientation="vertical"
-        >
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/card_view_radius">
+
         <ImageView
-            android:id="@+id/image_movie_horizontal"
-            android:layout_width="@dimen/width_image_movie_horizontal"
-            android:layout_height="@dimen/height_image_movie_horizontal"
-            tools:src = "@tools:sample/avatars"
-            android:scaleType="centerCrop"
-            tools:ignore="ContentDescription"
-            />
-        <TextView
+                android:id="@+id/image_movie_horizontal"
+                android:layout_width="@dimen/width_image_movie_horizontal"
+                android:layout_height="@dimen/height_image_movie_horizontal"
+                tools:src="@tools:sample/avatars"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"
+        />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
             android:id="@+id/text_movie_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_normal_100"
             android:layout_marginTop="@dimen/margin_normal_100"
             android:transitionName="@string/text_movie_name_transition"
             tools:text="@tools:sample/full_names"
             style="@style/HighlightSubTitleAppearance"
-            />
-        <TextView
+    />
+    <TextView
             android:id="@+id/text_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/NormalSubTitleAppearance"
-            android:layout_marginStart="@dimen/margin_normal_100"
             android:transitionName="@string/text_release_date_transition"
             tools:text="@tools:sample/date/ddmmyy"
-            />
-        <RatingBar
-                android:id="@+id/rating_bar_movie_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_normal_100"
-                tools:rating="5"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-        />
+    />
+    <RatingBar
+            android:id="@+id/rating_bar_movie_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
+            tools:rating="5"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+    />
 
-    </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</LinearLayout>

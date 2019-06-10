@@ -1,5 +1,6 @@
 package com.example.mymovie2019.ui.casts
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,6 @@ import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.ActivityNavigator
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovie2019.MyApplication
@@ -18,6 +17,7 @@ import com.example.mymovie2019.R
 import com.example.mymovie2019.data.local.model.CastTransfer
 import com.example.mymovie2019.ui.base.BaseFragment
 import com.example.mymovie2019.ui.base.BaseViewModel
+import com.example.mymovie2019.ui.castdetail.CastDetailActivity
 import com.example.mymovie2019.ui.main.MainViewModel
 import com.example.mymovie2019.utils.EndlessScrollListener
 import com.example.mymovie2019.utils.MyGridDividerItemDecoration
@@ -99,9 +99,9 @@ class CastsFragment : BaseFragment(), CastGridAdapter.OnClickCastItemListener {
         val namePair = Pair<View,String>(textCastName, getString(R.string.text_name_cast_transition))
 
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), imagePair, namePair)
-        val extras = ActivityNavigator.Extras.Builder().setActivityOptions(options).build()
-        val navToDetailAction = CastsFragmentDirections.actionCastsDestToCastDetailDest(castTransfer)
-        findNavController().navigate(navToDetailAction, extras)
+        val intent = Intent(requireActivity(), CastDetailActivity::class.java)
+        intent.putExtra(CastDetailActivity.BUNDLE_CAST_TRANSFER, castTransfer)
+        startActivity(intent, options.toBundle())
     }
 
     private fun setCastRecyclerViewOnScrolledListener() {

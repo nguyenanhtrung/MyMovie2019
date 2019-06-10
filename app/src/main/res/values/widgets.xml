@@ -14,7 +14,7 @@
 
     <style name="Widget.HighlightBackgroundText" parent="">
         <item name="android:textAppearance">@style/HighlightSecondaryTitleAppearance</item>
-        <item name="android:background">@color/colorSurface</item>
+        <item name="android:background">@color/colorSecondary</item>
         <item name="android:paddingTop">@dimen/padding_small_100</item>
         <item name="android:paddingBottom">@dimen/padding_small_100</item>
         <item name="android:paddingStart">@dimen/padding_normal_100</item>

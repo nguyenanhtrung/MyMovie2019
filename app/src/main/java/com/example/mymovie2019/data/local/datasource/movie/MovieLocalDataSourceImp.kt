@@ -49,7 +49,7 @@ class MovieLocalDataSourceImp @Inject constructor(private val movieDao: MovieDao
             movieDetailResponse.genres,
             movieDetailResponse.releaseDate,
             movieDetailResponse.budget,
-            movieDetailResponse.revenue,
+            movieDetailResponse.revenue!!.toLong(),
             movieDetailResponse.homepage,
             casts
         )

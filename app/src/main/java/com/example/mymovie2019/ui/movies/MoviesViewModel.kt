@@ -60,11 +60,6 @@ class MoviesViewModel @Inject constructor(
     internal val genresLiveData: LiveData<MutableList<GenreLocal>>
         get() = _genresLiveData
 
-    private val _navigateDetailLiveData by lazy {
-        MutableLiveData<Event<MovieTransfer>>()
-    }
-    internal val navigateDetailLiveData: LiveData<Event<MovieTransfer>>
-        get() = _navigateDetailLiveData
 
     private var popularMoviePage = 1
     private var upComingMoviePage = 1
@@ -76,9 +71,6 @@ class MoviesViewModel @Inject constructor(
         _moviesTypeLiveData.value = moviesType
     }
 
-    fun onClickMovieItem(movieTransfer: MovieTransfer) {
-        _navigateDetailLiveData.value = Event(movieTransfer)
-    }
 
     fun loadAllMovies() {
         loadMovieByType(popularMoviePage, MovieType.POPULAR) {

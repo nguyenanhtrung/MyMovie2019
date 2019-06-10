@@ -36,11 +36,9 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
         const val BUNDLE_MOVIE_DETAIL = "BundleMovieDetail"
     }
 
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var movieDetailViewModel: MovieDetailViewModel
-
     private lateinit var castMovieDetailAdapter: CastMovieDetailAdapter
 
 
@@ -125,8 +123,8 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
         val shareViewPairs = getCastShareViewPairs(viewPosition)
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, *shareViewPairs)
         val castDetailIntent = Intent(this, CastDetailActivity::class.java)
+        castDetailIntent.putExtra(CastDetailActivity.BUNDLE_CAST_TRANSFER, castTransfer)
         startActivity(castDetailIntent, options.toBundle())
-        
     }
 
 
@@ -188,7 +186,7 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
             text_runtime.text = ConvertUtils.convertToHourAndMinute(runtime)
             text_premiere.text = premiere
             text_homepage.text = homePage
-            text_budget.text = ConvertUtils.formatMoney(budget)
+            text_budget.text = ConvertUtils.formatMoney(budget!!.toLong())
             text_revenue.text = ConvertUtils.formatMoney(revenue)
             val categories = movieDetailViewModel.getGenreNames(genres = category)
             text_categories.text = categories
@@ -204,12 +202,9 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
         }
     }
 
-
     private fun showMovieBackground(imageUrl: String?) {
         image_movie_poster.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}$imageUrl")
     }
-
-
 
     private fun showMovieReleaseDate(releaseDate: String) {
         text_movie_release_date.text = releaseDate
@@ -223,7 +218,6 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
         imageUrl?.let {
             image_movie_detail.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}$it")
         }
-
     }
 
     override fun getSnackBarViewGroup(): View = root_view

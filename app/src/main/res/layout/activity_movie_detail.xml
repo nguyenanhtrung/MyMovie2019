@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_view"
     android:fitsSystemWindows="true"
+    android:paddingBottom="@dimen/padding_normal_100"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

@@ -28,7 +28,7 @@ class ConvertUtils {
             return "$hour"
         }
 
-        fun formatMoney(money: Int?): String {
+        fun formatMoney(money: Long?): String {
             return try {
                 val formatCurrency =  NumberFormat.getCurrencyInstance()
                 formatCurrency.format(money)

@@ -31,8 +31,6 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     MovieGenresAdapter.OnClickGenreItemListener{
 
 
-
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -179,7 +177,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     ) {
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *shareViewPairs);
         val intent = Intent(requireActivity(), MovieDetailActivity::class.java)
-        intent.putExtra(MovieDetailActivity.BUNDLE_MOVIE_DETAIL, movieTransfer)
+        intent.putExtra(BUNDLE_MOVIE_DETAIL, movieTransfer)
         startActivity(intent, options.toBundle())
     }
 }

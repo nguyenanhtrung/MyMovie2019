@@ -5,9 +5,9 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.navArgs
 import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.R
+import com.example.mymovie2019.data.local.model.CastTransfer
 import com.example.mymovie2019.ui.base.BaseActivity
 import com.example.mymovie2019.ui.base.BaseViewModel
 import com.example.mymovie2019.utils.AppKey
@@ -17,7 +17,10 @@ import javax.inject.Inject
 
 class CastDetailActivity : BaseActivity() {
 
-    private val castArgs = navArgs<CastDetailActivityArgs>()
+    companion object {
+        const val BUNDLE_CAST_TRANSFER = "BundleCastTransfer"
+    }
+
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -65,7 +68,7 @@ class CastDetailActivity : BaseActivity() {
     }
 
     private fun onReceivedData() {
-        val castTransfer = castArgs.value.CastTransferDetail
+        val castTransfer = intent.getParcelableExtra<CastTransfer>(BUNDLE_CAST_TRANSFER)
         showCastImage(castTransfer.imageUrl)
         showCastName(castTransfer.name)
         castDetailViewModel.castId = castTransfer.id

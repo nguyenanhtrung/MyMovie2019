@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_slider_image"
     xmlns:tools="http://schemas.android.com/tools">
@@ -12,6 +12,6 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         tools:src = "@tools:sample/backgrounds/scenic"
-        />
+        tools:ignore="ContentDescription" />
 
-</FrameLayout>
+</com.google.android.material.card.MaterialCardView>

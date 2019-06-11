@@ -80,7 +80,7 @@ class CastDetailActivity : BaseActivity() {
 
     private fun showCastImage(imageUrl: String?) {
         imageUrl?.let {
-            image_cast_detail.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}$imageUrl")
+            image_cast_detail.loadImageByUrl("${AppKey.URL_MOVIE_ITEM_IMAGE_PATH}$imageUrl")
         }
     }
 

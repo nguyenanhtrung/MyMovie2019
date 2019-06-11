@@ -1,6 +1,6 @@
 package com.example.mymovie2019.domains.movies
 
-import com.example.mymovie2019.data.local.model.MovieEntity
+import com.example.mymovie2019.data.local.database.entity.MovieEntity
 import com.example.mymovie2019.data.local.model.MovieItem
 import com.example.mymovie2019.data.local.model.MovieType
 import com.example.mymovie2019.data.remote.response.MoviesResponse

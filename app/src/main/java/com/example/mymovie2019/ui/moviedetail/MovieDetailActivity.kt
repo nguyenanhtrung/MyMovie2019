@@ -55,12 +55,9 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         //
-
         onReceivedData()
         setupUiComponents()
         setupUiEvents()
-
-
     }
 
     private fun onReceivedData() {
@@ -203,7 +200,7 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
     }
 
     private fun showMovieBackground(imageUrl: String?) {
-        image_movie_poster.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}$imageUrl")
+        image_movie_poster.loadImageByUrl("${AppKey.BASE_URL_SLIDER_IMAGE_PATH}$imageUrl")
     }
 
     private fun showMovieReleaseDate(releaseDate: String) {
@@ -216,7 +213,7 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
 
     private fun showImageMovie(imageUrl: String?) {
         imageUrl?.let {
-            image_movie_detail.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}$it")
+            image_movie_detail.loadImageByUrl("${AppKey.URL_MOVIE_ITEM_IMAGE_PATH}$it")
         }
     }
 

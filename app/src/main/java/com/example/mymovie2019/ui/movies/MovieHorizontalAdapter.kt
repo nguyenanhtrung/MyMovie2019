@@ -101,7 +101,7 @@ class MovieHorizontalAdapter(
             textMovieName.text = item.name
             textReleaseDate.text = item.releaseDate
             if (!item.imageUrl.isNullOrEmpty()) {
-                val imageUrl = "${AppKey.BASE_URL_IMAGE_PATH}${item.imageUrl}"
+                val imageUrl = "${AppKey.URL_MOVIE_ITEM_IMAGE_PATH}${item.imageUrl}"
                 imageMovie.loadImageByUrl(imageUrl)
             }
             val movieRating = item.rating.toFloat()

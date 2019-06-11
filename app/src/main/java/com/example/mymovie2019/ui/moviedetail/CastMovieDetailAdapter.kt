@@ -56,7 +56,7 @@ class CastMovieDetailAdapter(
             text_character_name.text = item.character
             text_cast_name_horizontal.text = item.name
             if (!item.imageUrl.isNullOrEmpty()) {
-                image_cast.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}${item.imageUrl}")
+                image_cast.loadImageByUrl("${AppKey.URL_MOVIE_ITEM_IMAGE_PATH}${item.imageUrl}")
             }
 
         }

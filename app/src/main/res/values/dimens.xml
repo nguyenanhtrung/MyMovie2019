@@ -26,7 +26,7 @@
     <dimen name="width_image_movie_horizontal">150dp</dimen>
     <dimen name="height_image_movie_horizontal">150dp</dimen>
     <dimen name="width_item_category">150dp</dimen>
-    <dimen name="height_item_category">150dp</dimen>
+    <dimen name="height_item_category">100dp</dimen>
     <dimen name="width_image_video">150dp</dimen>
     <dimen name="height_image_video">150dp</dimen>
     <dimen name="width_image_movie_vertical">150dp</dimen>

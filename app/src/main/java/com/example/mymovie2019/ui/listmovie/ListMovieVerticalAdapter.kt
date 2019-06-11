@@ -46,7 +46,7 @@ class ListMovieVerticalAdapter(private val onItemClickListener: OnClickMoveItemL
                 text_release_date_vertical.text = releaseDate
                 rating_bar_movie_vertical.rating = (rating / 2).toFloat()
                 if (imagePath != null) {
-                    image_movie_vertical.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}$imagePath")
+                    image_movie_vertical.loadImageByUrl("${AppKey.URL_MOVIE_ITEM_IMAGE_PATH}$imagePath")
                 }
             }
         }

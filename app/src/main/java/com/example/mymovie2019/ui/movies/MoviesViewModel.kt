@@ -2,10 +2,11 @@ package com.example.mymovie2019.ui.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mymovie2019.data.local.database.entity.GenreLocal
+import com.example.mymovie2019.data.local.database.entity.GenreEntity
 import com.example.mymovie2019.data.local.model.*
 import com.example.mymovie2019.data.repository.genre.GenreRepository
 import com.example.mymovie2019.data.repository.movie.MovieRepository
+import com.example.mymovie2019.domains.genres.GetGenresUseCase
 import com.example.mymovie2019.domains.movies.GetMoviesUseCase
 import com.example.mymovie2019.domains.movies.GetSliderPopularMoviesUseCase
 import com.example.mymovie2019.ui.base.BaseViewModel
@@ -30,8 +31,12 @@ class MoviesViewModel @Inject constructor(
         GetMoviesUseCase(this, movieRepository, this)
     }
 
-    private val getSliderMoviesUsecase by lazy {
+    private val getSliderMoviesUseCase by lazy {
         GetSliderPopularMoviesUseCase(this, movieRepository)
+    }
+
+    private val getGenresUseCase by lazy {
+        GetGenresUseCase(this, genreRepository, this)
     }
 
     private val _moviesTypeLiveData by lazy {
@@ -55,9 +60,9 @@ class MoviesViewModel @Inject constructor(
     private lateinit var timerSliderMovie: TimerTask
 
     private val _genresLiveData by lazy {
-        MutableLiveData<MutableList<GenreLocal>>()
+        MutableLiveData<MutableList<GenreEntity>>()
     }
-    internal val genresLiveData: LiveData<MutableList<GenreLocal>>
+    internal val genresLiveData: LiveData<MutableList<GenreEntity>>
         get() = _genresLiveData
 
 
@@ -174,7 +179,7 @@ class MoviesViewModel @Inject constructor(
     }
 
     private fun showSliderMovieImage() {
-        getSliderMoviesUsecase.invoke(MovieType.POPULAR) {
+        getSliderMoviesUseCase.invoke(MovieType.POPULAR) {
             _sliderMoviesLiveData.value = it
         }
     }
@@ -193,9 +198,13 @@ class MoviesViewModel @Inject constructor(
                 }
             }
         }
-
     }
 
+    fun loadGenreMovies() {
+        getGenresUseCase.invoke(GenreCategory.MOVIE) {
+            _genresLiveData.value = it.toMutableList()
+        }
+    }
     fun onScrollViewEvent(sliderHeight: Int, scrollY: Int, oldScrollY: Int) {
         if (scrollY > sliderHeight) {
             timerSliderMovie.cancel()

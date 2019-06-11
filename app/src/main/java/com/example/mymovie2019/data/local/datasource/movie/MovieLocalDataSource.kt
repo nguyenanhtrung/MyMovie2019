@@ -1,5 +1,6 @@
 package com.example.mymovie2019.data.local.datasource.movie
 
+import com.example.mymovie2019.data.local.database.entity.MovieEntity
 import com.example.mymovie2019.data.local.model.*
 import com.example.mymovie2019.data.remote.response.MovieCreditResponse
 import com.example.mymovie2019.data.remote.response.MovieDetailResponse

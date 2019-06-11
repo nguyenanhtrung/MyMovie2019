@@ -39,12 +39,9 @@ class MovieDetailViewModel @Inject constructor(private val movieRepository: Movi
 
     fun loadMovieDetail() {
         launch {
-            delay(500)
-            showLoading()
             val movieDetailResult = movieRepository.getMovieDetailAsync(movieId)
             val movieCreditResult = movieRepository.getCreditMovieAsync(movieId)
             val movieDetail = movieRepository.parseToMovieDetail(movieDetailResult.await(),movieCreditResult.await())
-            hideLoading()
             showMovieDetailInfo(movieDetail)
         }
     }

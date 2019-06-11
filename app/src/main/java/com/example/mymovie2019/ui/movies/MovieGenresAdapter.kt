@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovie2019.R
-import com.example.mymovie2019.data.local.database.entity.GenreLocal
+import com.example.mymovie2019.data.local.database.entity.GenreEntity
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_movie_category.*
 
 
-class MovieGenresAdapter(private val onItemClickListener: OnClickGenreItemListener) : ListAdapter<GenreLocal,MovieGenresAdapter.GenresViewHolder>(GenreDiffUtilCallBack()) {
+class MovieGenresAdapter(private val onItemClickListener: OnClickGenreItemListener) : ListAdapter<GenreEntity,MovieGenresAdapter.GenresViewHolder>(GenreDiffUtilCallBack()) {
 
     interface OnClickGenreItemListener {
         fun onGenreItemClick(view: View?, position: Int)
@@ -39,18 +39,18 @@ class MovieGenresAdapter(private val onItemClickListener: OnClickGenreItemListen
             onItemClickListener.onGenreItemClick(p0, adapterPosition)
         }
 
-        fun bindData(item: GenreLocal) {
+        fun bindData(item: GenreEntity) {
             text_category_name.text = item.name
         }
     }
 
-    class GenreDiffUtilCallBack : DiffUtil.ItemCallback<GenreLocal>() {
+    class GenreDiffUtilCallBack : DiffUtil.ItemCallback<GenreEntity>() {
 
-        override fun areItemsTheSame(oldItem: GenreLocal, newItem: GenreLocal): Boolean {
+        override fun areItemsTheSame(oldItem: GenreEntity, newItem: GenreEntity): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: GenreLocal, newItem: GenreLocal): Boolean {
+        override fun areContentsTheSame(oldItem: GenreEntity, newItem: GenreEntity): Boolean {
             return oldItem == newItem
         }
 

@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovie2019.R
 import com.example.mymovie2019.data.local.model.CastItem
 import com.example.mymovie2019.data.local.model.ItemType
-import com.example.mymovie2019.utils.AppKey.Companion.BASE_URL_IMAGE_PATH
+import com.example.mymovie2019.utils.AppKey.Companion.CAST_ITEM_URL_IMAGE_PATH
+import com.example.mymovie2019.utils.AppKey.Companion.URL_MOVIE_ITEM_IMAGE_PATH
 import com.example.mymovie2019.utils.loadImageByUrl
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -64,7 +65,7 @@ class CastGridAdapter(private val onItemClickListener: OnClickCastItemListener) 
             textCastName.text = item.name
             val itemImagePath = item.imagePath
             if (!itemImagePath.isNullOrEmpty()) {
-                val finalImagePath = "${BASE_URL_IMAGE_PATH}$itemImagePath"
+                val finalImagePath = "https://image.tmdb.org/t/p/w200$itemImagePath"
                 castImageView.loadImageByUrl(finalImagePath)
             }
 

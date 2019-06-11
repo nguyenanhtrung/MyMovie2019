@@ -17,6 +17,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action android:id="@+id/action_movies_dest_to_casts_dest" app:destination="@id/casts_dest"
+                app:enterAnim="@anim/slide_enter_anim" app:exitAnim="@anim/slide_exit_anim"
+                app:popEnterAnim="@anim/slide_pop_enter_anim" app:popExitAnim="@anim/slide_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/casts_dest"

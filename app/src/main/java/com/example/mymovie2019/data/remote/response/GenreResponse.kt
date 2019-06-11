@@ -5,4 +5,7 @@ import com.squareup.moshi.Json
 class GenreResponse(
     @Json(name = "genres")
     val genres: List<Genre> = listOf()
-) : BaseResponse()
+) : BaseResponse() {
+
+    var genreCategory: String = ""
+}

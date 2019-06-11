@@ -2,7 +2,7 @@ package com.example.mymovie2019.data.local.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.example.mymovie2019.data.local.model.MovieEntity
+import com.example.mymovie2019.data.local.database.entity.MovieEntity
 
 @Dao
 interface MovieDao : BaseDao<MovieEntity>{

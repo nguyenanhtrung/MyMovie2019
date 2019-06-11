@@ -10,6 +10,8 @@ import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.R
 import com.example.mymovie2019.ui.base.BaseActivity
 import com.example.mymovie2019.ui.base.BaseViewModel
+import com.example.mymovie2019.ui.casts.CastsFragmentDirections
+import com.example.mymovie2019.ui.movies.MoviesFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -23,12 +25,11 @@ class MainActivity : BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.FirstTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupUIComponents()
         //
-        mainViewModel.loadGenres()
-
     }
 
     private fun setupUIComponents() {

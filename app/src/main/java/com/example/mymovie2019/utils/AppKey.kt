@@ -13,7 +13,17 @@ class AppKey private constructor(){
 
         private const val DEFAULT_SIZE_IMAGE = "w200"
 
-        const val BASE_URL_IMAGE_PATH = "https://image.tmdb.org/t/p/original/"
+        private const val SLIDER_SIZE_IMAGE = "w500"
+
+        private const val CAST_ITEM_SIZE_IMAGE = "w200"
+
+        private const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/"
+
+        const val URL_MOVIE_ITEM_IMAGE_PATH = "$BASE_URL_IMAGE$DEFAULT_SIZE_IMAGE/"
+
+        const val BASE_URL_SLIDER_IMAGE_PATH = "$BASE_URL_IMAGE$SLIDER_SIZE_IMAGE/"
+
+        const val CAST_ITEM_URL_IMAGE_PATH = "https://image.tmdb.org/t/p/$CAST_ITEM_SIZE_IMAGE"
 
         const val KEY_INTENT_TO_MOVIE_DETAIL = "SliderMovieItem"
     }

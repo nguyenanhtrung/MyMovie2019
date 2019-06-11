@@ -80,7 +80,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     }
 
     private fun subscribeGenreMovies() {
-        moviesViewModel.genresLiveData.observe(this, Observer {
+        moviesViewModel.genresLiveData.observe(viewLifecycleOwner, Observer {
             genresAdapter.submitList(it)
         })
     }
@@ -94,7 +94,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     }
 
     private fun setupMoviesTypeRecyclerView() {
-        val linearLayoutManager = object : LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false) {
+        val linearLayoutManager = object : LinearLayoutManager(requireActivity(), VERTICAL, false) {
             override fun canScrollVertically(): Boolean {
                 return false
             }
@@ -116,7 +116,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
 
         moviesViewModel.showListMoviesType()
         moviesViewModel.loadAllMovies()
-
+        moviesViewModel.loadGenreMovies()
     }
 
     private fun setupScrollViewEvent() {

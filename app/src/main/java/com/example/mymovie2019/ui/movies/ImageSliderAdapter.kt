@@ -30,7 +30,7 @@ class ImageSliderAdapter(private val context: Context,
             }
         }
         val sliderImageItem = sliderImages[position]
-        imageView.loadImageByUrl("${AppKey.BASE_URL_IMAGE_PATH}${sliderImageItem.imageUrl}")
+        imageView.loadImageByUrl("${AppKey.BASE_URL_SLIDER_IMAGE_PATH}${sliderImageItem.imageUrl}")
         container.addView(view,0)
         return view
     }

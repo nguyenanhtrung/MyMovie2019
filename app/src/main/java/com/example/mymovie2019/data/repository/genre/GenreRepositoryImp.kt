@@ -13,8 +13,8 @@ class GenreRepositoryImp @Inject constructor(
     private val genreLocalDataSource: GenreLocalDataSource
 ) : GenreRepository {
 
-    override fun updateMovieDetailId(movieDetailId: Long) {
-        genreLocalDataSource.updateMovieDetailId(movieDetailId)
+    override fun updateMovieDetailId(movieDetailId: Long, genreIds: List<Long>?) {
+        genreLocalDataSource.updateMovieDetailId(movieDetailId, genreIds)
     }
 
     override fun saveGenres(genres: List<GenreEntity>){

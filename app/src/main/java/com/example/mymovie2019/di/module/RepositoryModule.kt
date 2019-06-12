@@ -6,18 +6,24 @@ import com.example.mymovie2019.data.local.datasource.genre.GenreLocalDataSource
 import com.example.mymovie2019.data.local.datasource.genre.GenreLocalDataSourceImp
 import com.example.mymovie2019.data.local.datasource.movie.MovieLocalDataSource
 import com.example.mymovie2019.data.local.datasource.movie.MovieLocalDataSourceImp
+import com.example.mymovie2019.data.local.datasource.moviedetail.MovieDetailLocalDataSource
+import com.example.mymovie2019.data.local.datasource.moviedetail.MovieDetailLocalDataSourceImp
 import com.example.mymovie2019.data.remote.datasource.cast.CastRemoteDataSource
 import com.example.mymovie2019.data.remote.datasource.cast.CastRemoteDataSourceImp
 import com.example.mymovie2019.data.remote.datasource.genre.GenreRemoteDataSource
 import com.example.mymovie2019.data.remote.datasource.genre.GenreRemoteDataSourceImp
 import com.example.mymovie2019.data.remote.datasource.movie.MovieRemoteDataSource
 import com.example.mymovie2019.data.remote.datasource.movie.MovieRemoteDataSourceImp
+import com.example.mymovie2019.data.remote.datasource.moviedetail.MovieDetailRemoteDataSource
+import com.example.mymovie2019.data.remote.datasource.moviedetail.MovieDetailRemoteDataSourceImp
 import com.example.mymovie2019.data.repository.cast.CastRepository
 import com.example.mymovie2019.data.repository.cast.CastRepositoryImp
 import com.example.mymovie2019.data.repository.genre.GenreRepository
 import com.example.mymovie2019.data.repository.genre.GenreRepositoryImp
 import com.example.mymovie2019.data.repository.movie.MovieRepository
 import com.example.mymovie2019.data.repository.movie.MovieRepositoryImp
+import com.example.mymovie2019.data.repository.moviedetail.MovieDetailRepository
+import com.example.mymovie2019.data.repository.moviedetail.MovieDetailRepositoryImp
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -79,6 +85,22 @@ class RepositoryModule {
         return castRepository
     }
 
+    @Provides
+    @Singleton
+    fun provideMovieDetailLocalDataSource(movieDetailLocalDataSource: MovieDetailLocalDataSourceImp): MovieDetailLocalDataSource {
+        return movieDetailLocalDataSource
+    }
 
+    @Provides
+    @Singleton
+    fun provideMovieDetailRemoteDataSource(movieRemoteDataSourceImp: MovieDetailRemoteDataSourceImp): MovieDetailRemoteDataSource {
+        return movieRemoteDataSourceImp
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDetailRepository(movieDetailRepository: MovieDetailRepositoryImp): MovieDetailRepository {
+        return movieDetailRepository
+    }
 
 }

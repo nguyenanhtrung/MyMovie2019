@@ -9,6 +9,9 @@ interface BaseDao<T> {
     @Insert
     fun insertDatas(datas : List<T>)
 
+    @Insert
+    fun insertData(data: T)
+
     @Delete
     fun deleteData(data : T): Int
 }

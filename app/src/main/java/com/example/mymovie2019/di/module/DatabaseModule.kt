@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.mymovie2019.data.local.database.AppDatabase
 import com.example.mymovie2019.data.local.database.dao.GenreDao
 import com.example.mymovie2019.data.local.database.dao.MovieDao
+import com.example.mymovie2019.data.local.database.dao.MovieDetailDao
 import com.example.mymovie2019.di.custom.ApplicationContext
 import dagger.Module
 import dagger.Provides
@@ -29,5 +30,11 @@ class DatabaseModule {
     @Singleton
     fun provideMovieDao(appDatabase: AppDatabase) : MovieDao {
         return appDatabase.movieDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDetailDao(appDatabase: AppDatabase) : MovieDetailDao {
+        return appDatabase.movieDetailDao()
     }
 }

@@ -14,6 +14,6 @@ interface GenreDao : BaseDao<GenreEntity> {
     @Query("SELECT COUNT(*) FROM Genre WHERE type = :typeName")
     fun countMovieGenres(typeName: String) : Long
 
-    @Query("UPDATE  Genre SET movie_detail_id = (:movieDetailId)")
-    fun updateMovieDetailId(movieDetailId: Long)
+    @Query("UPDATE  Genre SET movie_detail_id = (:movieDetailId) WHERE id IN (:genreIds)")
+    fun updateMovieDetailId(movieDetailId: Long, genreIds: List<Long>)
 }

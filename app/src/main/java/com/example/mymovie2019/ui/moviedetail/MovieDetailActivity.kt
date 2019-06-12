@@ -194,7 +194,6 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
     private fun showInfoDetail(movieAbout: MovieAbout) {
         with(movieAbout) {
             showOverview(overview)
-            showCasts(casts)
             showMovieAbout(this)
         }
     }

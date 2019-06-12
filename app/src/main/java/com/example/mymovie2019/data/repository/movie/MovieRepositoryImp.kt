@@ -21,14 +21,6 @@ class MovieRepositoryImp @Inject constructor(private val movieRemoteDataSource: 
         return movieLocalDataSource.getMoviesTypeVerticalItems()
     }
 
-    override fun getMovieDetailAsync(movieId: Int): Deferred<MovieDetailResponse> {
-        return movieRemoteDataSource.getMovieDetailAsync(movieId)
-    }
-
-    override fun parseToMovieDetail(movieDetailResponse: MovieDetailResponse, movieCreditResponse: MovieCreditResponse): MovieDetail {
-        return movieLocalDataSource.parseToMovieDetail(movieDetailResponse, movieCreditResponse)
-    }
-
     override fun getCreditMovieAsync(movieId: Int): Deferred<MovieCreditResponse> {
         return movieRemoteDataSource.getCreditMovieAsync(movieId)
     }

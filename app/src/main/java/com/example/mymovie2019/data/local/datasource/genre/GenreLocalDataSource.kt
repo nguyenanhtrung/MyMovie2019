@@ -13,5 +13,5 @@ interface GenreLocalDataSource {
 
     fun getGenreNames(genres:List<Genre>?): String
 
-    fun updateMovieDetailId(movieDetailId: Long)
+    fun updateMovieDetailId(movieDetailId: Long, genreIds: List<Long>?)
 }

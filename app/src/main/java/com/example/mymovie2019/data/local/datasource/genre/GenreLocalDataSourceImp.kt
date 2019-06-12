@@ -9,8 +9,10 @@ import javax.inject.Inject
 class GenreLocalDataSourceImp @Inject constructor(private val genreDao: GenreDao) : GenreLocalDataSource {
 
 
-    override fun updateMovieDetailId(movieDetailId: Long) {
-        genreDao.updateMovieDetailId(movieDetailId)
+    override fun updateMovieDetailId(movieDetailId: Long, genreIds: List<Long>?) {
+        genreIds?.let {
+            genreDao.updateMovieDetailId(movieDetailId,it)
+        }
     }
 
     override fun saveGenres(genres: List<GenreEntity>) {

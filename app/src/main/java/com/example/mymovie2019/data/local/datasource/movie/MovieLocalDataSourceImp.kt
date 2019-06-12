@@ -32,29 +32,7 @@ class MovieLocalDataSourceImp @Inject constructor(private val movieDao: MovieDao
         return movieTypes
     }
 
-    override fun parseToMovieDetail(movieDetailResponse: MovieDetailResponse, movieCreditResponse: MovieCreditResponse): MovieDetail {
 
-        return MovieDetail(
-            movieDetailResponse.backdropPath,
-            movieDetailResponse.genres,
-            createMovieAbout(movieDetailResponse, movieCreditResponse.cast)
-        )
-    }
-
-    private fun createMovieAbout(movieDetailResponse: MovieDetailResponse, casts: List<Cast>): MovieAbout {
-        return MovieAbout(
-            movieDetailResponse.overview,
-            movieDetailResponse.originalTitle,
-            movieDetailResponse.status,
-            movieDetailResponse.runtime,
-            movieDetailResponse.genres,
-            movieDetailResponse.releaseDate,
-            movieDetailResponse.budget,
-            movieDetailResponse.revenue!!.toLong(),
-            movieDetailResponse.homepage,
-            casts
-        )
-    }
 
     override fun saveMovies(movieEntities: List<MovieEntity>) {
         return movieDao.insertDatas(movieEntities)

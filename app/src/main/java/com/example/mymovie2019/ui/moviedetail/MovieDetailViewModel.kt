@@ -10,14 +10,21 @@ import com.example.mymovie2019.data.remote.response.Genre
 import com.example.mymovie2019.data.repository.cast.CastRepository
 import com.example.mymovie2019.data.repository.genre.GenreRepository
 import com.example.mymovie2019.data.repository.movie.MovieRepository
+import com.example.mymovie2019.data.repository.moviedetail.MovieDetailRepository
+import com.example.mymovie2019.domains.moviedetail.GetMovieDetailUseCase
 import com.example.mymovie2019.ui.base.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MovieDetailViewModel @Inject constructor(private val movieRepository: MovieRepository,
+class MovieDetailViewModel @Inject constructor(private val movieDetailRepository: MovieDetailRepository,
                                                private val genreRepository: GenreRepository,
                                                private val castRepository: CastRepository) : BaseViewModel() {
+
+
+    private val getMovieDetailUseCase by lazy {
+        GetMovieDetailUseCase(this, movieDetailRepository, genreRepository, this)
+    }
 
     private val _movieDetailLiveData by lazy {
         MutableLiveData<MovieDetail>()
@@ -36,18 +43,13 @@ class MovieDetailViewModel @Inject constructor(private val movieRepository: Movi
         get() = _navigateCastDetail
 
 
-
     fun loadMovieDetail() {
-        launch {
-            val movieDetailResult = movieRepository.getMovieDetailAsync(movieId)
-            val movieCreditResult = movieRepository.getCreditMovieAsync(movieId)
-            val movieDetail = movieRepository.parseToMovieDetail(movieDetailResult.await(),movieCreditResult.await())
-            showMovieDetailInfo(movieDetail)
+        if (movieId == -1) {
+            return
         }
-    }
-
-    private fun showMovieDetailInfo(movieDetail: MovieDetail) {
-        _movieDetailLiveData.value = movieDetail
+        getMovieDetailUseCase.invoke(movieId) {
+            _movieDetailLiveData.value = it
+        }
     }
 
     fun getGenreNames(genres: List<Genre>?) = genreRepository.getGenreNames(genres)

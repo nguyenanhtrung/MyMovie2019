@@ -10,7 +10,5 @@ interface MovieRemoteDataSource {
 
      suspend fun getMoviesAsync(page: Int, movieType: MovieType): MoviesResponse
 
-     fun getMovieDetailAsync(movieId: Int): Deferred<MovieDetailResponse>
-
      fun getCreditMovieAsync(movieId: Int): Deferred<MovieCreditResponse>
 }

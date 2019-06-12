@@ -54,7 +54,7 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope, InteractionWithUICal
 
 
     override fun onCleared() {
-        super.onCleared()
         job.cancel()
+        super.onCleared()
     }
 }

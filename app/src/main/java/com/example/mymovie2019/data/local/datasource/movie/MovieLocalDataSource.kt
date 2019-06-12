@@ -9,8 +9,6 @@ interface MovieLocalDataSource {
 
     fun getMoviesTypeVerticalItems(): MutableList<MoviesVerticalItem>
 
-    fun parseToMovieDetail(movieDetailResponse: MovieDetailResponse, movieCreditResponse: MovieCreditResponse): MovieDetail
-
     fun getMovieTransfers(movieTransContracts: List<MovieTransferContract>): MutableList<MovieTransfer>
 
     fun saveMovies(movieEntities: List<MovieEntity>)

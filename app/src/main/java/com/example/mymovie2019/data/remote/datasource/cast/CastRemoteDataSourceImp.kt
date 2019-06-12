@@ -3,6 +3,7 @@ package com.example.mymovie2019.data.remote.datasource.cast
 import com.example.mymovie2019.data.remote.response.CastMovieResponse
 import com.example.mymovie2019.data.remote.response.CastTvShowResponse
 import com.example.mymovie2019.data.remote.response.CastsResponse
+import com.example.mymovie2019.data.remote.response.MovieCreditResponse
 import com.example.mymovie2019.data.remote.service.ApiService
 import com.example.mymovie2019.utils.AppKey
 import kotlinx.coroutines.Deferred
@@ -20,5 +21,9 @@ class CastRemoteDataSourceImp @Inject constructor(private val apiService: ApiSer
 
     override fun getMoviesOfCastAsync(castId: Int): Deferred<CastMovieResponse> {
         return apiService.getMoviesOfCastAsync(castId, AppKey.API_KEY)
+    }
+
+    override fun getCastsOfMovieAsync(movieId: Int): Deferred<MovieCreditResponse> {
+        return apiService.getCreditMovieAsync(movieId, AppKey.API_KEY)
     }
 }

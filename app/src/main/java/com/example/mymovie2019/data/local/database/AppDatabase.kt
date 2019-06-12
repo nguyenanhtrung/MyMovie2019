@@ -5,11 +5,12 @@ import androidx.room.RoomDatabase
 import com.example.mymovie2019.data.local.database.dao.GenreDao
 import com.example.mymovie2019.data.local.database.dao.MovieDao
 import com.example.mymovie2019.data.local.database.dao.MovieDetailDao
+import com.example.mymovie2019.data.local.database.entity.CastEntity
 import com.example.mymovie2019.data.local.database.entity.GenreEntity
 import com.example.mymovie2019.data.local.database.entity.MovieDetailEntity
 import com.example.mymovie2019.data.local.database.entity.MovieEntity
 
-@Database(entities = [GenreEntity::class, MovieEntity::class, MovieDetailEntity::class], version = 1)
+@Database(entities = [GenreEntity::class, MovieEntity::class, MovieDetailEntity::class, CastEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun genreDao(): GenreDao
     abstract fun movieDao(): MovieDao

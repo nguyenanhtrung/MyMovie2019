@@ -9,4 +9,4 @@ data class MovieCreditResponse(
     val crew: List<Crew> = listOf(),
     @Json(name = "id")
     val id: Int = 0
-)
+) : BaseResponse()

@@ -21,10 +21,6 @@ class MovieRepositoryImp @Inject constructor(private val movieRemoteDataSource: 
         return movieLocalDataSource.getMoviesTypeVerticalItems()
     }
 
-    override fun getCreditMovieAsync(movieId: Int): Deferred<MovieCreditResponse> {
-        return movieRemoteDataSource.getCreditMovieAsync(movieId)
-    }
-
     override fun getMovieTransfers(movieTransContracts: List<MovieTransferContract>): MutableList<MovieTransfer> {
         return movieLocalDataSource.getMovieTransfers(movieTransContracts)
     }

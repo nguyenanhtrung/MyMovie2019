@@ -3,6 +3,7 @@ package com.example.mymovie2019.data.remote.datasource.cast
 import com.example.mymovie2019.data.remote.response.CastMovieResponse
 import com.example.mymovie2019.data.remote.response.CastTvShowResponse
 import com.example.mymovie2019.data.remote.response.CastsResponse
+import com.example.mymovie2019.data.remote.response.MovieCreditResponse
 import kotlinx.coroutines.Deferred
 
 interface CastRemoteDataSource {
@@ -12,4 +13,6 @@ interface CastRemoteDataSource {
     fun getTvShowsOfCastAsync(castId: Int): Deferred<CastTvShowResponse>
 
     fun getMoviesOfCastAsync(castId: Int): Deferred<CastMovieResponse>
+
+    fun getCastsOfMovieAsync(movieId: Int):  Deferred<MovieCreditResponse>
 }

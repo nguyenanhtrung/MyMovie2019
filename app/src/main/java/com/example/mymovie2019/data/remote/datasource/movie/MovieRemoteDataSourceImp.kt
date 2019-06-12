@@ -16,8 +16,4 @@ class MovieRemoteDataSourceImp @Inject constructor(private val apiService: ApiSe
         MovieType.UPCOMING -> apiService.getUpcomingMovies(page, AppKey.API_KEY).await()
         MovieType.TOP_RATED -> apiService.getTopRatedMovies(page, AppKey.API_KEY).await()
     }
-
-    override fun getCreditMovieAsync(movieId: Int): Deferred<MovieCreditResponse> {
-        return apiService.getCreditMovieAsync(movieId,AppKey.API_KEY)
-    }
 }

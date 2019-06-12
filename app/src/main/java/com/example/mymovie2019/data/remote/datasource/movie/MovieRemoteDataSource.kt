@@ -9,6 +9,4 @@ import kotlinx.coroutines.Deferred
 interface MovieRemoteDataSource {
 
      suspend fun getMoviesAsync(page: Int, movieType: MovieType): MoviesResponse
-
-     fun getCreditMovieAsync(movieId: Int): Deferred<MovieCreditResponse>
 }

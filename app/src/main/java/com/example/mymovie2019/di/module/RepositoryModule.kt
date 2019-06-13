@@ -2,6 +2,8 @@ package com.example.mymovie2019.di.module
 
 import com.example.mymovie2019.data.local.datasource.cast.CastLocalDataSource
 import com.example.mymovie2019.data.local.datasource.cast.CastLocalDataSourceImp
+import com.example.mymovie2019.data.local.datasource.character.CharacterLocalDataSource
+import com.example.mymovie2019.data.local.datasource.character.CharacterLocalDataSourceImp
 import com.example.mymovie2019.data.local.datasource.genre.GenreLocalDataSource
 import com.example.mymovie2019.data.local.datasource.genre.GenreLocalDataSourceImp
 import com.example.mymovie2019.data.local.datasource.movie.MovieLocalDataSource
@@ -18,6 +20,8 @@ import com.example.mymovie2019.data.remote.datasource.moviedetail.MovieDetailRem
 import com.example.mymovie2019.data.remote.datasource.moviedetail.MovieDetailRemoteDataSourceImp
 import com.example.mymovie2019.data.repository.cast.CastRepository
 import com.example.mymovie2019.data.repository.cast.CastRepositoryImp
+import com.example.mymovie2019.data.repository.character.CharacterRepository
+import com.example.mymovie2019.data.repository.character.CharacterRepositoryImp
 import com.example.mymovie2019.data.repository.genre.GenreRepository
 import com.example.mymovie2019.data.repository.genre.GenreRepositoryImp
 import com.example.mymovie2019.data.repository.movie.MovieRepository
@@ -101,6 +105,18 @@ class RepositoryModule {
     @Singleton
     fun provideMovieDetailRepository(movieDetailRepository: MovieDetailRepositoryImp): MovieDetailRepository {
         return movieDetailRepository
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterLocalDataSource(characterLocalDataSourceImp: CharacterLocalDataSourceImp): CharacterLocalDataSource {
+        return characterLocalDataSourceImp
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterRepository(characterRepositoryImp: CharacterRepositoryImp): CharacterRepository {
+        return characterRepositoryImp
     }
 
 }

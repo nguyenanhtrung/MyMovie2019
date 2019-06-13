@@ -3,9 +3,7 @@ package com.example.mymovie2019.di.module
 import android.content.Context
 import androidx.room.Room
 import com.example.mymovie2019.data.local.database.AppDatabase
-import com.example.mymovie2019.data.local.database.dao.GenreDao
-import com.example.mymovie2019.data.local.database.dao.MovieDao
-import com.example.mymovie2019.data.local.database.dao.MovieDetailDao
+import com.example.mymovie2019.data.local.database.dao.*
 import com.example.mymovie2019.di.custom.ApplicationContext
 import dagger.Module
 import dagger.Provides
@@ -36,5 +34,17 @@ class DatabaseModule {
     @Singleton
     fun provideMovieDetailDao(appDatabase: AppDatabase) : MovieDetailDao {
         return appDatabase.movieDetailDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterDao(appDatabase: AppDatabase) : CharacterDao {
+        return appDatabase.characterDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCastDao(appDatabase: AppDatabase) : CastDao {
+        return appDatabase.castDao()
     }
 }

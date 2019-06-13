@@ -89,9 +89,19 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
     private fun setupUiEvents() {
         subscribeMovieDetail()
         subscribeNavigatToCastDetail()
+        subscribeCastsOfMovie()
         setupAppBarLayoutEvent()
         setupBackButtonEvent()
         movieDetailViewModel.loadMovieDetail()
+        movieDetailViewModel.loadCastsOfMovie()
+    }
+
+    private fun subscribeCastsOfMovie() {
+        movieDetailViewModel.castOfMovie.observe(this, Observer {
+            if (it != null) {
+                castMovieDetailAdapter.submitList(it)
+            }
+        })
     }
 
     private fun subscribeNavigatToCastDetail() {
@@ -170,11 +180,6 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
         text_overview.text = overview
     }
 
-    private fun showCasts(casts: List<Cast>?) {
-        casts?.let {
-            castMovieDetailAdapter.submitList(it.toMutableList())
-        }
-    }
 
     private fun showMovieAbout(movieAbout: MovieAbout) {
         with(movieAbout) {

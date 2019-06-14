@@ -9,8 +9,7 @@ import com.example.mymovie2019.data.local.database.entity.*
     MovieEntity::class,
     MovieDetailEntity::class,
     CastEntity::class,
-    CharacterEntity::class,
-    CastEntity::class], version = 1)
+    CharacterEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun genreDao(): GenreDao
     abstract fun movieDao(): MovieDao

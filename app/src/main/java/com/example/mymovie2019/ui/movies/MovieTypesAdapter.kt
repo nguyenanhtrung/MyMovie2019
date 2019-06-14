@@ -40,8 +40,8 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
             MovieHorizontalAdapter.OnClickMovieItem {
 
 
-        private lateinit var textTitle: TextView
-        lateinit var recyclerViewMovies: RecyclerView
+        private var textTitle: TextView
+        private var recyclerViewMovies: RecyclerView
 
         init {
             with(containerView) {

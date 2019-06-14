@@ -170,7 +170,6 @@ class MoviesViewModel @Inject constructor(
                 addAllMovies(it, movieType)
             }
         }
-
     }
 
     private fun startPopularMoviesSlider() {

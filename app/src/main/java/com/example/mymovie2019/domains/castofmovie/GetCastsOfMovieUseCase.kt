@@ -24,6 +24,8 @@ class GetCastsOfMovieUseCase(
     override fun createNetworkBoundResource(): NetworkBoundResource<in Int, MovieCreditResponse, List<Cast>>
         = object : NetworkBoundResource<Int, MovieCreditResponse, List<Cast>>() {
 
+        override fun isShowLoading(): Boolean = false
+
         override fun loadFromLocal(param: Int): List<Cast> {
             return castRepository.getCastLocalOfMovie(param)
         }

@@ -18,7 +18,7 @@ class CastLocalDataSourceImp @Inject constructor(private val castDao: CastDao) :
             return
         }
         val castEntities = casts.map {
-            CastEntity(it.id, it.gender, it.name, it.imageUrl!!)
+            CastEntity(it.id, it.gender, it.name, it.imageUrl ?: "")
         }
         castDao.insertDatas(castEntities)
     }

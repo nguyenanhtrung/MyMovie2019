@@ -10,4 +10,8 @@ class CharacterRepositoryImp @Inject constructor(private val characterLocalDataS
     override fun saveCharacters(characters: List<CharacterParam>) {
         characterLocalDataSource.saveCharacters(characters)
     }
+
+    override fun checkExistCharsOfMovie(movieId: Int): Boolean {
+        return characterLocalDataSource.checkExistCharsOfMovie(movieId)
+    }
 }

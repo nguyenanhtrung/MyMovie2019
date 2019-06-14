@@ -78,10 +78,10 @@ class MovieHorizontalAdapter(
 
     class MovieHorizontalViewHolder(view: View, private val onItemClickListener: OnClickMovieItem) :
         RecyclerView.ViewHolder(view), View.OnClickListener {
-        lateinit var imageMovie: ImageView
-        lateinit var textMovieName: TextView
-        lateinit var textReleaseDate: TextView
-        lateinit var ratingMovie: RatingBar
+        var imageMovie: ImageView
+        var textMovieName: TextView
+        var textReleaseDate: TextView
+        var ratingMovie: RatingBar
 
         init {
             with(itemView) {

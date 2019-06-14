@@ -9,6 +9,7 @@ import com.example.mymovie2019.domains.base.BaseRemoteUseCase
 import com.example.mymovie2019.ui.base.InteractionWithUICallback
 import com.example.mymovie2019.utils.NetworkBoundResource
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 
 class GetMovieDetailUseCase(
         uiScope: CoroutineScope,
@@ -19,6 +20,7 @@ class GetMovieDetailUseCase(
 
 
     override suspend fun execute(parameter: Int): MovieDetailResponse {
+        delay(200)
         return movieDetailRepository.getMovieDetailAsync(movieId = parameter).await()
     }
 

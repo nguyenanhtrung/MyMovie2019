@@ -16,7 +16,8 @@ import com.example.mymovie2019.utils.EndlessScrollListener
 
 
 class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovieItemListener,
-                        private val onClickMovieItem: OnClickItemMovieHorizontalListener) : ListAdapter<MoviesVerticalItem, MovieTypesAdapter.MovieTypesViewHolder>(MoviesTypeItemDiffCallBack()) {
+                        private val onClickMovieItem: OnClickItemMovieHorizontalListener,
+                        private val onClickMovieVerticalItemListener: OnClickMovieVerticalItemListener) : ListAdapter<MoviesVerticalItem, MovieTypesAdapter.MovieTypesViewHolder>(MoviesTypeItemDiffCallBack()) {
 
     private val viewPool = RecyclerView.RecycledViewPool()
 
@@ -25,7 +26,8 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
         return MovieTypesViewHolder(inflater.inflate(R.layout.item_vertical_recyclerview_movies, parent, false),
                 viewPool,
                 onLoadMoreMovieItemListener,
-                onClickMovieItem)
+                onClickMovieItem,
+                onClickMovieVerticalItemListener)
     }
 
     override fun onBindViewHolder(holder: MovieTypesViewHolder, position: Int) {
@@ -33,18 +35,21 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
     }
 
 
-    class MovieTypesViewHolder(private val containerView: View,
+    class MovieTypesViewHolder(containerView: View,
                                private val viewPool: RecyclerView.RecycledViewPool,
                                private val onLoadMoreMovieItemListener: OnLoadMoreMovieItemListener,
-                               private val onClickMovieItem: OnClickItemMovieHorizontalListener) : RecyclerView.ViewHolder(containerView),
-            MovieHorizontalAdapter.OnClickMovieItem {
+                               private val onClickMovieItem: OnClickItemMovieHorizontalListener,
+                               private val onClickMovieVerticalItemListener: OnClickMovieVerticalItemListener) : RecyclerView.ViewHolder(containerView),
+            MovieHorizontalAdapter.OnClickMovieItem, View.OnClickListener {
 
 
         private var textTitle: TextView
         private var recyclerViewMovies: RecyclerView
+        private var textSeeAll: TextView
 
         init {
             with(containerView) {
+                textSeeAll = findViewById(R.id.text_title_see_all)
                 textTitle = findViewById(R.id.text_title_movie_type)
                 recyclerViewMovies = findViewById(R.id.recycler_view_movies)
                 val moviesLayoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
@@ -58,8 +63,8 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
 
                     })
                     setRecycledViewPool(viewPool)
-
                 }
+                textSeeAll.setOnClickListener(this@MovieTypesViewHolder)
             }
         }
 
@@ -76,6 +81,11 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
             val movieItem = movieHorizontalAdapter.getItemByPosition(position)
             val movieTransfer = MovieTransfer(movieItem)
             onClickMovieItem.onItemMovieLick(movieTransfer, imageView, textName, textDate)
+        }
+
+        //On Movie Type Item Click
+        override fun onClick(v: View?) {
+            onClickMovieVerticalItemListener.onClickTextSeeAll(v!!, adapterPosition)
         }
     }
 
@@ -96,6 +106,10 @@ class MovieTypesAdapter(private val onLoadMoreMovieItemListener: OnLoadMoreMovie
 
     interface OnClickItemMovieHorizontalListener {
         fun onItemMovieLick(movieTransfer: MovieTransfer, imageView: ImageView, textName: TextView, textDate: TextView)
+    }
+
+    interface OnClickMovieVerticalItemListener {
+        fun onClickTextSeeAll(view: View, position: Int)
     }
 
 }

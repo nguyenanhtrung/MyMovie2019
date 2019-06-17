@@ -11,4 +11,4 @@ data class CastsResponse(
     val totalPages: Int = 0,
     @Json(name = "total_results")
     val totalResults: Int = 0
-)
+) : BaseResponse()

@@ -17,17 +17,17 @@ class MovieLocalDataSourceImp @Inject constructor(private val movieDao: MovieDao
         movieTypes += MoviesVerticalItem(
             POPULAR.ordinal,
             "Popular Movies",
-            mutableListOf(MovieItem(itemType = ItemType.ListLoading))
+            mutableListOf(MovieItem(itemType = ItemType.LOADING))
         )
         movieTypes += MoviesVerticalItem(
             UPCOMING.ordinal,
             "Upcoming Movies",
-            mutableListOf(MovieItem(itemType = ItemType.ListLoading))
+            mutableListOf(MovieItem(itemType = ItemType.LOADING))
         )
         movieTypes += MoviesVerticalItem(
             TOP_RATED.ordinal,
             "TopRated Movies",
-            mutableListOf(MovieItem(itemType = ItemType.ListLoading))
+            mutableListOf(MovieItem(itemType = ItemType.LOADING))
         )
         return movieTypes
     }

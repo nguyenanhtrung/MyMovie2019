@@ -23,13 +23,13 @@
     <dimen name="width_image_cast">64dp</dimen>
     <dimen name="height_image_cast">64dp</dimen>
     <dimen name="width_border_circle_image">1dp</dimen>
-    <dimen name="width_image_movie_horizontal">150dp</dimen>
+    <dimen name="width_image_movie_horizontal">120dp</dimen>
     <dimen name="height_image_movie_horizontal">150dp</dimen>
     <dimen name="width_item_category">150dp</dimen>
     <dimen name="height_item_category">100dp</dimen>
     <dimen name="width_image_video">150dp</dimen>
     <dimen name="height_image_video">150dp</dimen>
-    <dimen name="width_image_movie_vertical">150dp</dimen>
+    <dimen name="width_image_movie_vertical">@dimen/width_image_movie_horizontal</dimen>
     <dimen name="height_image_movie_vertical">150dp</dimen>
 
     <dimen name="card_view_radius">3dp</dimen>

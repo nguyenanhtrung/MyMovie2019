@@ -24,8 +24,8 @@ class CastGridAdapter(private val onItemClickListener: OnClickCastItemListener) 
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position).itemType) {
-        ItemType.Normal -> R.layout.item_cast_grid
-        ItemType.ItemLoading -> R.layout.item_grid_load_more
+        ItemType.NORMAL -> R.layout.item_cast_grid
+        ItemType.LOAD_MORE -> R.layout.item_grid_load_more
         else -> R.layout.item_cast_grid
     }
 

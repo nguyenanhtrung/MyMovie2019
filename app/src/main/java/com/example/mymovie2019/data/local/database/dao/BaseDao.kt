@@ -10,6 +10,9 @@ interface BaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertDatas(datas : List<T>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertDatasWithReplace(datas: List<T>)
+
     @Insert
     fun insertData(data: T)
 

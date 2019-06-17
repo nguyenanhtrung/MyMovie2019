@@ -12,6 +12,7 @@ import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.R
@@ -28,7 +29,8 @@ import javax.inject.Inject
 class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemListener,
     ImageSliderAdapter.OnClickMovieSliderItemListener,
     MovieTypesAdapter.OnClickItemMovieHorizontalListener,
-    MovieGenresAdapter.OnClickGenreItemListener{
+    MovieGenresAdapter.OnClickGenreItemListener,
+    MovieTypesAdapter.OnClickMovieVerticalItemListener{
 
 
     @Inject
@@ -100,9 +102,8 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
             }
         }
         recycler_view_vertical_movies.layoutManager = linearLayoutManager
-
         if (!::moviesTypeAdapter.isInitialized) {
-            moviesTypeAdapter = MovieTypesAdapter(this@MoviesFragment, this)
+            moviesTypeAdapter = MovieTypesAdapter(this@MoviesFragment, this, this)
         }
         recycler_view_vertical_movies.adapter = moviesTypeAdapter
     }
@@ -113,10 +114,25 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
         subscribeSliderMovies()
         subscribePageMovieSlider()
         subscribeGenreMovies()
+        subscribeNavigateToSeeMoreMovies()
 
         moviesViewModel.showListMoviesType()
         moviesViewModel.loadAllMovies()
         moviesViewModel.loadGenreMovies()
+    }
+
+    private fun subscribeNavigateToSeeMoreMovies() {
+        moviesViewModel.navigateToSeeMoreMovie.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { pairArugment ->
+                val seeMoreMovieDirection = MoviesFragmentDirections.actionMoviesDestToSeeMoreMovieDest(pairArugment.first, pairArugment.second)
+                findNavController().navigate(seeMoreMovieDirection)
+            }
+        })
+    }
+
+    //On Click Movie Type Item
+    override fun onClickTextSeeAll(view: View, position: Int) {
+        moviesViewModel.onClickTextSeeAllMovie(position)
     }
 
     private fun setupScrollViewEvent() {
@@ -147,7 +163,6 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
         val imagePair = Pair<View,String>(view, getString(R.string.image_movie_transition_name))
         openMovieDetailWithShareElementTransition(movieTransfer, imagePair)
     }
-
 
     override fun onLoadMoreMovie(page: Int, listPosition: Int) {
         moviesViewModel.onLoadMoreMovies(page, listPosition)

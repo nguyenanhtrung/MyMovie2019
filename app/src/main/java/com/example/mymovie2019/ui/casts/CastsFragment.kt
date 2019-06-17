@@ -62,7 +62,7 @@ class CastsFragment : BaseFragment(), CastGridAdapter.OnClickCastItemListener {
     private fun setupCastsRecyclerView() {
         recycler_view_cast_grid.apply {
             layoutManager = GridLayoutManager(requireActivity(), 3)
-            val gridItemDecoration = MyGridDividerItemDecoration(16, 3)
+            val gridItemDecoration = MyGridDividerItemDecoration(8, 3)
             addItemDecoration(gridItemDecoration)
         }
         if (!::castGridAdapter.isInitialized) {

@@ -98,6 +98,7 @@ abstract class EndlessScrollListener : RecyclerView.OnScrollListener {
         }
 
         if (!loading && lastVisibleItemPosition == totalItemCount - 1) {
+            //if not connect to internet
             currentPage++
             onLoadMore(currentPage, totalItemCount, view)
             loading = true

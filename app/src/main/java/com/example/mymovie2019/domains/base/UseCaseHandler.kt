@@ -1,4 +1,4 @@
-package com.example.mymovie2019.ui.base
+package com.example.mymovie2019.domains.base
 
 interface UseCaseHandler<T> {
 

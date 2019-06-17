@@ -8,6 +8,7 @@ import com.example.mymovie2019.data.local.model.Event
 import com.example.mymovie2019.data.local.model.ItemType
 import com.example.mymovie2019.data.remote.response.CastsResponse
 import com.example.mymovie2019.data.repository.cast.CastRepository
+import com.example.mymovie2019.domains.casts.GetCastsUseCase
 import com.example.mymovie2019.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,29 +27,17 @@ class CastsViewModel @Inject constructor(private val castRepository: CastReposit
     internal val navigateToDetail: LiveData<Event<CastTransfer>>
         get() = _navigateToDetail
 
+    private val getCastsUseCase by lazy {
+        GetCastsUseCase(this, castRepository, this)
+    }
+
     private var currentCastPage = 1
     var currentPosCastSelected = -1
 
     internal fun loadPopularCasts() {
-        launch {
-            showLoading()
-            val castsResponse = castRepository.getPopularCastsAsync(currentCastPage).await()
-            hideLoading()
-            val castItems = parseCastsRemoteToCastItems(castsResponse)
-            showPopularCasts(castItems)
+        getCastsUseCase.invoke(currentCastPage) {
+            _castsLiveData.value = it.toMutableList()
         }
-    }
-
-    private fun parseCastsRemoteToCastItems(castsResponse: CastsResponse): MutableList<CastItem> {
-        val castsRemote = castsResponse.castRemotes
-        val castItems = castsRemote.map {
-            CastItem(it.id, it.name, it.profilePath)
-        }
-        return castItems.toMutableList()
-    }
-
-    private fun showPopularCasts(castItems: MutableList<CastItem>) {
-        _castsLiveData.value = castItems
     }
 
     private fun getCopyPopularCasts(): MutableList<CastItem> {
@@ -66,12 +55,12 @@ class CastsViewModel @Inject constructor(private val castRepository: CastReposit
         launch {
             currentCastPage = page + 1
             showLoadingMoreCasts()
-            val castsResponse = castRepository.getPopularCastsAsync(currentCastPage).await()
-            hideLoadingMoreCasts()
-            val castItems = parseCastsRemoteToCastItems(castsResponse)
-            val copyPopularCasts = getCopyPopularCasts()
-            copyPopularCasts.addAll(castItems)
-            _castsLiveData.value = copyPopularCasts
+            getCastsUseCase.invoke(currentCastPage) {
+                hideLoadingMoreCasts()
+                val copyPopularCasts = getCopyPopularCasts()
+                copyPopularCasts.addAll(it)
+                _castsLiveData.value = copyPopularCasts
+            }
         }
     }
 
@@ -80,7 +69,7 @@ class CastsViewModel @Inject constructor(private val castRepository: CastReposit
         if (copyPopularCasts.isEmpty()) {
             return
         }
-        copyPopularCasts.add(CastItem(itemType = ItemType.ItemLoading))
+        copyPopularCasts.add(CastItem(itemType = ItemType.LOAD_MORE))
         _castsLiveData.value = copyPopularCasts
     }
 
@@ -89,7 +78,7 @@ class CastsViewModel @Inject constructor(private val castRepository: CastReposit
         if (copyPopularCasts.isEmpty()) {
             return
         }
-        copyPopularCasts.remove(CastItem(itemType = ItemType.ItemLoading))
+        copyPopularCasts.remove(CastItem(itemType = ItemType.LOAD_MORE))
         _castsLiveData.value = copyPopularCasts
     }
 

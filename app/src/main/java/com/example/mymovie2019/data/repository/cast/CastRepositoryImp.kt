@@ -1,6 +1,7 @@
 package com.example.mymovie2019.data.repository.cast
 
 import com.example.mymovie2019.data.local.datasource.cast.CastLocalDataSource
+import com.example.mymovie2019.data.local.model.CastItem
 import com.example.mymovie2019.data.local.model.CastTransfer
 import com.example.mymovie2019.data.local.model.CastTransferContract
 import com.example.mymovie2019.data.remote.datasource.cast.CastRemoteDataSource
@@ -11,6 +12,9 @@ import javax.inject.Inject
 class CastRepositoryImp @Inject constructor(private val castRemoteDataSource: CastRemoteDataSource,
                                             private val castLocalDataSource: CastLocalDataSource) : CastRepository {
 
+    override fun saveCastsFromCastRemotes(casts: List<CastRemote>) {
+        castLocalDataSource.saveCastsFromCastRemotes(casts)
+    }
 
     override fun getCastsOfMovieAsync(movieId: Int): Deferred<MovieCreditResponse> {
        return castRemoteDataSource.getCastsOfMovieAsync(movieId)
@@ -38,6 +42,8 @@ class CastRepositoryImp @Inject constructor(private val castRemoteDataSource: Ca
         return castLocalDataSource.parseToCastTransfer(castTransferContract)
     }
 
+    override fun isCastsSaved(page: Int): Boolean = castLocalDataSource.isCastsSaved(page)
 
+    override fun getCasts(page: Int): List<CastItem> = castLocalDataSource.getCasts(page)
 
 }

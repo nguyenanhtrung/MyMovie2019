@@ -71,9 +71,9 @@ class MovieHorizontalAdapter(
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position).itemType) {
-        ItemType.ListLoading -> R.layout.item_list_loading
-        ItemType.Normal -> R.layout.item_movie_horizontal
-        ItemType.ItemLoading -> R.layout.item_loading_more
+        ItemType.LOADING -> R.layout.item_list_loading
+        ItemType.NORMAL -> R.layout.item_movie_horizontal
+        ItemType.LOAD_MORE -> R.layout.item_loading_more
     }
 
     class MovieHorizontalViewHolder(view: View, private val onItemClickListener: OnClickMovieItem) :

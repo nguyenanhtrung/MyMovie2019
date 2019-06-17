@@ -14,6 +14,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
+import kotlin.NoSuchElementException
 import kotlin.concurrent.schedule
 
 class MoviesViewModel @Inject constructor(
@@ -24,7 +25,7 @@ class MoviesViewModel @Inject constructor(
     companion object {
         private const val NUMBER_OF_ITEM_SLIDER = 4
         private const val TIME_SLIDE_POPULAR_MOVIE: Long = 4000
-        private const val DELAY_TIME_LOAD_MORE = 500L
+        private const val DELAY_TIME_LOAD_MORE = 300L
     }
 
     private val getMoviesUseCase by lazy {
@@ -65,6 +66,13 @@ class MoviesViewModel @Inject constructor(
     internal val genresLiveData: LiveData<MutableList<GenreEntity>>
         get() = _genresLiveData
 
+    private val _navigateToSeeMoreMovie by lazy {
+        MutableLiveData<Event<Pair<Int, Array<MovieItem>>>>()
+    }
+
+    val navigateToSeeMoreMovie: LiveData<Event<Pair<Int, Array<MovieItem>>>>
+        get() =  _navigateToSeeMoreMovie
+
 
     private var popularMoviePage = 1
     private var upComingMoviePage = 1
@@ -100,7 +108,6 @@ class MoviesViewModel @Inject constructor(
         movieTypesCopy[movieType.ordinal].movieItems.removeAt(0)
         movieTypesCopy[movieType.ordinal].movieItems.addAll(movieItems)
         _moviesTypeLiveData.value = movieTypesCopy
-
     }
 
     private fun getMovieVerticalItemsCopy(): MutableList<MoviesVerticalItem> {
@@ -117,10 +124,10 @@ class MoviesViewModel @Inject constructor(
         val moviesTypesCopy = getMovieVerticalItemsCopy()
         val moviesTypeItemCopy = moviesTypesCopy[movieType.ordinal]
         val movieItems = moviesTypeItemCopy.movieItems
-        if (movieItems[movieItems.size - 1].itemType == ItemType.ItemLoading) {
+        if (movieItems[movieItems.size - 1].itemType == ItemType.LOAD_MORE) {
             return
         }
-        movieItems.add(MovieItem(itemType = ItemType.ItemLoading))
+        movieItems.add(MovieItem(itemType = ItemType.LOAD_MORE))
         _moviesTypeLiveData.value = moviesTypesCopy
     }
 
@@ -156,6 +163,8 @@ class MoviesViewModel @Inject constructor(
     }
 
     fun onLoadMoreMovies(page: Int, listPosition: Int) {
+        //if not connected to internet && next page not exist in database then
+        //Not allow load more, --current page
         val movieType = MovieType.getTypeByValue(listPosition)
         val newPageByType = updatePage(page, movieType)
         loadMoreMovies(newPageByType, movieType)
@@ -169,6 +178,22 @@ class MoviesViewModel @Inject constructor(
                 hideLoadingMoreMovies(movieType)
                 addAllMovies(it, movieType)
             }
+        }
+    }
+
+    fun onClickTextSeeAllMovie(position: Int) {
+        val pairArgument = getArgumentsForSeeAllMovieFragment(position)
+        _navigateToSeeMoreMovie.value = Event(pairArgument)
+    }
+
+    private fun getArgumentsForSeeAllMovieFragment(position: Int): Pair<Int, Array<MovieItem>> {
+        val movieTypeItems = _moviesTypeLiveData.value ?: return Pair(popularMoviePage, arrayOf())
+        val movieItems = movieTypeItems[position].movieItems.toTypedArray()
+        return when (position) {
+            MovieType.POPULAR.ordinal -> Pair(popularMoviePage, movieItems)
+            MovieType.TOP_RATED.ordinal -> Pair(topRatedMoviePage, movieItems)
+            MovieType.UPCOMING.ordinal -> Pair(upComingMoviePage, movieItems)
+            else -> throw NoSuchElementException()
         }
     }
 
@@ -204,6 +229,7 @@ class MoviesViewModel @Inject constructor(
             _genresLiveData.value = it.toMutableList()
         }
     }
+
     fun onScrollViewEvent(sliderHeight: Int, scrollY: Int, oldScrollY: Int) {
         if (scrollY > sliderHeight) {
             timerSliderMovie.cancel()

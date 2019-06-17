@@ -55,6 +55,8 @@
         app:layout_anchor="@id/app_bar_movie_detail"
         app:layout_anchorGravity="bottom">
 
+
+
         <ImageView
             android:id="@+id/image_movie_detail"
             android:layout_width="@dimen/width_image_movie_vertical"

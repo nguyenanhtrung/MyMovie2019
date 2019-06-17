@@ -18,6 +18,9 @@ data class CastEntity(
     val name: String,
 
     @ColumnInfo(name = "profile_path")
-    val imagePath: String
+    val imagePath: String,
+
+    @ColumnInfo(name = "page")
+    val page: Int = 0
 
 )

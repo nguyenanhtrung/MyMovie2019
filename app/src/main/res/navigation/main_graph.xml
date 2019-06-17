@@ -20,6 +20,14 @@
         <action android:id="@+id/action_movies_dest_to_casts_dest" app:destination="@id/casts_dest"
                 app:enterAnim="@anim/slide_enter_anim" app:exitAnim="@anim/slide_exit_anim"
                 app:popEnterAnim="@anim/slide_pop_enter_anim" app:popExitAnim="@anim/slide_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_movies_dest_to_see_more_movie_dest"
+            app:destination="@id/see_more_movie_dest"
+            app:enterAnim="@anim/slide_enter_anim"
+            app:exitAnim="@anim/slide_exit_anim"
+            app:popEnterAnim="@anim/slide_pop_enter_anim"
+            app:popExitAnim="@anim/slide_pop_exit_anim"
+            app:popUpTo="@+id/movies_dest" />
     </fragment>
     <fragment
         android:id="@+id/casts_dest"
@@ -49,4 +57,10 @@
             android:name="CastTransferDetail"
             app:argType="com.example.mymovie2019.data.local.model.CastTransfer" />
     </activity>
+    <fragment android:id="@+id/see_more_movie_dest"
+              android:name="com.example.mymovie2019.ui.seemoremovie.SeeMoreMovieFragment"
+              android:label="SeeMoreMovieFragment">
+        <argument android:name="page" app:argType="integer" android:defaultValue="1"/>
+        <argument android:name="movieItem" app:argType="com.example.mymovie2019.data.local.model.MovieItem[]"/>
+    </fragment>
 </navigation>

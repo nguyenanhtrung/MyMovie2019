@@ -22,20 +22,19 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        setupLeakCanary()
         setupLogging()
         setupStrictMode()
         appComponent.inject(this)
     }
 
-    private fun setupLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
-    }
+//    private fun setupLeakCanary() {
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
+//    }
 
     private fun setupStrictMode() {
         if (BuildConfig.DEBUG) {

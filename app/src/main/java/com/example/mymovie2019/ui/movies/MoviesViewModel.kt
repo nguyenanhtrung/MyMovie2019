@@ -71,7 +71,7 @@ class MoviesViewModel @Inject constructor(
     }
 
     val navigateToSeeMoreMovie: LiveData<Event<Pair<Int, Array<MovieItem>>>>
-        get() =  _navigateToSeeMoreMovie
+        get() = _navigateToSeeMoreMovie
 
 
     private var popularMoviePage = 1
@@ -80,21 +80,30 @@ class MoviesViewModel @Inject constructor(
 
 
     fun showListMoviesType() {
-        val moviesType = movieRepository.getMoviesTypeVerticalItems()
-        _moviesTypeLiveData.value = moviesType
+        if (_moviesTypeLiveData.value.isNullOrEmpty()) {
+            val moviesType = movieRepository.getMoviesTypeVerticalItems()
+            _moviesTypeLiveData.value = moviesType
+        }
     }
 
 
     fun loadAllMovies() {
-        loadMovieByType(popularMoviePage, MovieType.POPULAR) {
-            startPopularMoviesSlider()
-            showMovies(it.toMutableList(), MovieType.POPULAR)
-        }
-        loadMovieByType(topRatedMoviePage, MovieType.TOP_RATED) {
-            showMovies(it.toMutableList(), MovieType.TOP_RATED)
-        }
-        loadMovieByType(upComingMoviePage, MovieType.UPCOMING) {
-            showMovies(it.toMutableList(), MovieType.UPCOMING)
+        val movieVerticalItems = _moviesTypeLiveData.value
+        movieVerticalItems?.let { movieVerItems ->
+            if (movieVerItems[MovieType.POPULAR.ordinal].movieItems.size == 1 && movieVerItems[MovieType.UPCOMING.ordinal].movieItems.size == 1 &&
+                movieVerItems[MovieType.TOP_RATED.ordinal].movieItems.size == 1
+            ) {
+                loadMovieByType(popularMoviePage, MovieType.POPULAR) {
+                    startPopularMoviesSlider()
+                    showMovies(it.toMutableList(), MovieType.POPULAR)
+                }
+                loadMovieByType(topRatedMoviePage, MovieType.TOP_RATED) {
+                    showMovies(it.toMutableList(), MovieType.TOP_RATED)
+                }
+                loadMovieByType(upComingMoviePage, MovieType.UPCOMING) {
+                    showMovies(it.toMutableList(), MovieType.UPCOMING)
+                }
+            }
         }
 
     }
@@ -225,8 +234,10 @@ class MoviesViewModel @Inject constructor(
     }
 
     fun loadGenreMovies() {
-        getGenresUseCase.invoke(GenreCategory.MOVIE) {
-            _genresLiveData.value = it.toMutableList()
+        if (_genresLiveData.value.isNullOrEmpty()) {
+            getGenresUseCase.invoke(GenreCategory.MOVIE) {
+                _genresLiveData.value = it.toMutableList()
+            }
         }
     }
 

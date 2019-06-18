@@ -20,7 +20,6 @@ class GetMovieDetailUseCase(
 
 
     override suspend fun execute(parameter: Int): MovieDetailResponse {
-        delay(200)
         return movieDetailRepository.getMovieDetailAsync(movieId = parameter).await()
     }
 

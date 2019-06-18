@@ -28,6 +28,10 @@
             app:popEnterAnim="@anim/slide_pop_enter_anim"
             app:popExitAnim="@anim/slide_pop_exit_anim"
             app:popUpTo="@+id/movies_dest" />
+        <action android:id="@+id/action_movies_dest_to_casts_dest2" app:destination="@id/casts_dest"
+                app:enterAnim="@anim/slide_enter_anim" app:exitAnim="@anim/slide_exit_anim"
+                app:popEnterAnim="@anim/slide_pop_enter_anim" app:popExitAnim="@anim/slide_pop_exit_anim"
+                app:popUpTo="@+id/movies_dest" app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/casts_dest"

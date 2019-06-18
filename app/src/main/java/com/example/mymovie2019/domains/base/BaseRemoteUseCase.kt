@@ -33,6 +33,7 @@ abstract class BaseRemoteUseCase<in Param, Response, MappedData>(
                             val result = withContext(Dispatchers.IO) {
                                 networkBoundResource.loadFromLocal(parameter)
                             }
+                            delay(200)
                             onCompleted(result)
                         }
 
@@ -56,6 +57,7 @@ abstract class BaseRemoteUseCase<in Param, Response, MappedData>(
                     networkBoundResource.saveToLocal(result)
                 }
                 val resultMapped: MappedData = networkBoundResource.mapFrom(result)
+                delay(200)
                 onCompleted(resultMapped)
             }
             else -> {

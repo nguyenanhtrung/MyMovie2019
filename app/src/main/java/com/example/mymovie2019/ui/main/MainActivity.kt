@@ -5,13 +5,13 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.R
 import com.example.mymovie2019.ui.base.BaseActivity
 import com.example.mymovie2019.ui.base.BaseViewModel
-import com.example.mymovie2019.ui.casts.CastsFragmentDirections
-import com.example.mymovie2019.ui.movies.MoviesFragmentDirections
+
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -21,6 +21,9 @@ class MainActivity : BaseActivity() {
     lateinit var viewModelFactory : ViewModelProvider.Factory
     private val mainViewModel by lazy {
         ViewModelProviders.of(this,viewModelFactory)[MainViewModel::class.java]
+    }
+    private val appBarConfiguration by lazy {
+        AppBarConfiguration(findNavController(R.id.fragment_host).graph)
     }
 
 
@@ -39,14 +42,13 @@ class MainActivity : BaseActivity() {
 
     private fun setupBottomNavView() {
         bottom_nav_bar.setupWithNavController(findNavController(R.id.fragment_host))
-        bottom_nav_bar.setOnNavigationItemReselectedListener {
 
-        }
+        bottom_nav_bar.setOnNavigationItemReselectedListener {}
     }
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        toolbar.navigationIcon = null
+        toolbar.setupWithNavController(findNavController(R.id.fragment_host),appBarConfiguration)
     }
 
     override fun createViewModel(): BaseViewModel = mainViewModel
@@ -56,6 +58,8 @@ class MainActivity : BaseActivity() {
     override fun injectDependencies(application: MyApplication) {
         application.appComponent.inject(this)
     }
+
+
 
 
 }

@@ -53,9 +53,11 @@ class MovieDetailActivity : BaseActivity(), CastMovieDetailAdapter.OnClickCastIt
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportPostponeEnterTransition()
         setContentView(R.layout.activity_movie_detail)
         //
         onReceivedData()
+        supportStartPostponedEnterTransition()
         setupUiComponents()
         setupUiEvents()
     }

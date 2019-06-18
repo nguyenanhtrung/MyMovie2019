@@ -7,6 +7,7 @@ import com.example.mymovie2019.domains.base.BaseRemoteUseCase
 import com.example.mymovie2019.ui.base.InteractionWithUICallback
 import com.example.mymovie2019.utils.NetworkBoundResource
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 
 class GetCastsUseCase(
     uiScope: CoroutineScope,
@@ -16,6 +17,7 @@ class GetCastsUseCase(
 
 
     override suspend fun execute(parameter: Int): CastsResponse {
+        delay(350)
         return castRepository.getPopularCastsAsync(parameter).await()
     }
 

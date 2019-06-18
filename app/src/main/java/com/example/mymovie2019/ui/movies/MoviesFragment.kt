@@ -193,6 +193,6 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *shareViewPairs);
         val intent = Intent(requireActivity(), MovieDetailActivity::class.java)
         intent.putExtra(BUNDLE_MOVIE_DETAIL, movieTransfer)
-        startActivity(intent, options.toBundle())
+        startActivity(intent,options.toBundle())
     }
 }

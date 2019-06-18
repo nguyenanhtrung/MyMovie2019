@@ -8,15 +8,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.mymovie2019.R
 
-fun ImageView.loadImageByUrl(url: String) {
+fun ImageView.loadImageByUrl(url: String, width: Int = 150, height: Int = 150) {
 
-    val loadingView = CircularProgressDrawable(context)
-    loadingView.strokeWidth = 5f
-    loadingView.centerRadius = 30f
-    loadingView.setColorSchemeColors(ContextCompat.getColor(context, R.color.colorSecondary))
-    loadingView.start()
-    val requestOption = RequestOptions.placeholderOf(loadingView)
-        .diskCacheStrategy(DiskCacheStrategy.DATA)
+
+    val requestOption = RequestOptions()
+        .override(width, height)
+        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
 
     Glide.with(this)
         .load(url)

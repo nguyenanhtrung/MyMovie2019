@@ -67,10 +67,10 @@ class MoviesViewModel @Inject constructor(
         get() = _genresLiveData
 
     private val _navigateToSeeMoreMovie by lazy {
-        MutableLiveData<Event<Pair<Int, Array<MovieItem>>>>()
+        MutableLiveData<Event<Triple<Int,MovieType,Array<MovieItem>>>>()
     }
 
-    val navigateToSeeMoreMovie: LiveData<Event<Pair<Int, Array<MovieItem>>>>
+    val navigateToSeeMoreMovie: LiveData<Event<Triple<Int,MovieType,Array<MovieItem>>>>
         get() = _navigateToSeeMoreMovie
 
 
@@ -191,17 +191,17 @@ class MoviesViewModel @Inject constructor(
     }
 
     fun onClickTextSeeAllMovie(position: Int) {
-        val pairArgument = getArgumentsForSeeAllMovieFragment(position)
-        _navigateToSeeMoreMovie.value = Event(pairArgument)
+        val tripleArgument = getArgumentsForSeeAllMovieFragment(position)
+        _navigateToSeeMoreMovie.value = Event(tripleArgument)
     }
 
-    private fun getArgumentsForSeeAllMovieFragment(position: Int): Pair<Int, Array<MovieItem>> {
-        val movieTypeItems = _moviesTypeLiveData.value ?: return Pair(popularMoviePage, arrayOf())
+    private fun getArgumentsForSeeAllMovieFragment(position: Int): Triple<Int, MovieType,Array<MovieItem>> {
+        val movieTypeItems = _moviesTypeLiveData.value ?: return Triple(popularMoviePage,MovieType.POPULAR, arrayOf())
         val movieItems = movieTypeItems[position].movieItems.toTypedArray()
         return when (position) {
-            MovieType.POPULAR.ordinal -> Pair(popularMoviePage, movieItems)
-            MovieType.TOP_RATED.ordinal -> Pair(topRatedMoviePage, movieItems)
-            MovieType.UPCOMING.ordinal -> Pair(upComingMoviePage, movieItems)
+            MovieType.POPULAR.ordinal -> Triple(popularMoviePage,MovieType.POPULAR ,movieItems)
+            MovieType.TOP_RATED.ordinal -> Triple(topRatedMoviePage,MovieType.TOP_RATED, movieItems)
+            MovieType.UPCOMING.ordinal -> Triple(upComingMoviePage,MovieType.UPCOMING, movieItems)
             else -> throw NoSuchElementException()
         }
     }

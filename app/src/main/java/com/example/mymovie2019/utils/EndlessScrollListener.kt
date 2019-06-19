@@ -26,8 +26,9 @@ abstract class EndlessScrollListener : RecyclerView.OnScrollListener {
         this.mLayoutManager = layoutManager
     }
 
-    constructor(layoutManager: GridLayoutManager) {
+    constructor(layoutManager: GridLayoutManager, page: Int) {
         this.mLayoutManager = layoutManager
+        this.currentPage = page
         visibleThreshold *= layoutManager.spanCount
     }
 

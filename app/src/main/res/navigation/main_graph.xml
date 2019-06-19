@@ -66,5 +66,6 @@
               android:label="SeeMoreMovieFragment">
         <argument android:name="page" app:argType="integer" android:defaultValue="1"/>
         <argument android:name="movieItem" app:argType="com.example.mymovie2019.data.local.model.MovieItem[]"/>
+        <argument android:name="movieType" app:argType="com.example.mymovie2019.data.local.model.MovieType"/>
     </fragment>
 </navigation>

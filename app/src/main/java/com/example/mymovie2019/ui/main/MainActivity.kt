@@ -42,7 +42,6 @@ class MainActivity : BaseActivity() {
 
     private fun setupBottomNavView() {
         bottom_nav_bar.setupWithNavController(findNavController(R.id.fragment_host))
-
         bottom_nav_bar.setOnNavigationItemReselectedListener {}
     }
 

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amplitude.api.Amplitude
 import com.example.mymovie2019.MyApplication
 import com.example.mymovie2019.R
 import com.example.mymovie2019.data.local.model.MovieTransfer
@@ -22,7 +23,12 @@ import com.example.mymovie2019.ui.base.BaseViewModel
 import com.example.mymovie2019.ui.main.MainViewModel
 import com.example.mymovie2019.ui.moviedetail.MovieDetailActivity
 import com.example.mymovie2019.ui.moviedetail.MovieDetailActivity.Companion.BUNDLE_MOVIE_DETAIL
+import com.flurry.android.FlurryAgent
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_movies.*
+import org.json.JSONObject
+import java.time.LocalDate
+import java.util.*
 import javax.inject.Inject
 
 
@@ -30,7 +36,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     ImageSliderAdapter.OnClickMovieSliderItemListener,
     MovieTypesAdapter.OnClickItemMovieHorizontalListener,
     MovieGenresAdapter.OnClickGenreItemListener,
-    MovieTypesAdapter.OnClickMovieVerticalItemListener{
+    MovieTypesAdapter.OnClickMovieVerticalItemListener {
 
 
     @Inject
@@ -57,7 +63,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     override fun createFragmentViewModel(): BaseViewModel = moviesViewModel
     override fun bindActivityViewModel(): BaseViewModel = activityViewModel
 
-    override fun setupBundle(){}
+    override fun setupBundle() {}
 
     override fun inflateLayout(inflater: LayoutInflater, container: ViewGroup?): View {
         return inflater.inflate(R.layout.fragment_movies, container, false)
@@ -70,7 +76,8 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     }
 
     private fun setupGenresRecyclerView() {
-        recycler_view_categories.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL,false)
+        recycler_view_categories.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         if (!::genresAdapter.isInitialized) {
             genresAdapter = MovieGenresAdapter(this)
         }
@@ -123,8 +130,12 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
 
     private fun subscribeNavigateToSeeMoreMovies() {
         moviesViewModel.navigateToSeeMoreMovie.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let { pairArugment ->
-                val seeMoreMovieDirection = MoviesFragmentDirections.actionMoviesDestToSeeMoreMovieDest(pairArugment.first, pairArugment.second)
+            it.getContentIfNotHandled()?.let { tripleArgument ->
+                val seeMoreMovieDirection = MoviesFragmentDirections.actionMoviesDestToSeeMoreMovieDest(
+                    tripleArgument.first,
+                    tripleArgument.third,
+                    tripleArgument.second
+                )
                 findNavController().navigate(seeMoreMovieDirection)
             }
         })
@@ -138,7 +149,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     private fun setupScrollViewEvent() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             scroll_view_movies.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-                moviesViewModel.onScrollViewEvent(view_pager_slider_image.height,scrollY,oldScrollY)
+                moviesViewModel.onScrollViewEvent(view_pager_slider_image.height, scrollY, oldScrollY)
             }
         }
     }
@@ -160,7 +171,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
     }
 
     override fun onClickMovieSliderItem(view: ImageView, movieTransfer: MovieTransfer) {
-        val imagePair = Pair<View,String>(view, getString(R.string.image_movie_transition_name))
+        val imagePair = Pair<View, String>(view, getString(R.string.image_movie_transition_name))
         openMovieDetailWithShareElementTransition(movieTransfer, imagePair)
     }
 
@@ -179,11 +190,11 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
         imageView: ImageView,
         textName: TextView,
         textDate: TextView
-        ) {
-        val imagePair = Pair<View,String>(imageView,getString(R.string.image_movie_transition_name))
-        val textNamePair = Pair<View,String>(textName,getString(R.string.text_movie_name_transition))
-        val textDatePair = Pair<View,String>(textDate, getString(R.string.text_release_date_transition))
-        openMovieDetailWithShareElementTransition(movieTransfer, imagePair,textNamePair, textDatePair)
+    ) {
+        val imagePair = Pair<View, String>(imageView, getString(R.string.image_movie_transition_name))
+        val textNamePair = Pair<View, String>(textName, getString(R.string.text_movie_name_transition))
+        val textDatePair = Pair<View, String>(textDate, getString(R.string.text_release_date_transition))
+        openMovieDetailWithShareElementTransition(movieTransfer, imagePair, textNamePair, textDatePair)
     }
 
     private fun openMovieDetailWithShareElementTransition(
@@ -193,6 +204,6 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *shareViewPairs);
         val intent = Intent(requireActivity(), MovieDetailActivity::class.java)
         intent.putExtra(BUNDLE_MOVIE_DETAIL, movieTransfer)
-        startActivity(intent,options.toBundle())
+        startActivity(intent, options.toBundle())
     }
 }

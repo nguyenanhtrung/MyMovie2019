@@ -3,10 +3,8 @@
     <string name="title_list_movie">Movies</string>
     <string name="title_tv_show">TvShows</string>
     <string name="title_list_cast">Casts</string>
-    <string name="title_popular">Popular</string>
     <string name="title_see_all">See all</string>
     <string name="title_latest">Latest</string>
-    <string name="title_upcoming">Upcoming</string>
     <string name="title_list_categories">Categories</string>
     <string name="title_network_error">Network not available!</string>
     <string name="title_retry">Retry</string>
@@ -34,4 +32,7 @@
     <string name="text_image_cast_transition">cast_image</string>
     <string name="error_network_call">Error network call</string>
     <string name="error_time_out">Timeout! Cannot connect to server</string>
+    <string name="title_popular">Popular</string>
+    <string name="title_top_rated">Top Rated</string>
+    <string name="title_upcoming">Upcoming</string>
 </resources>

@@ -22,4 +22,5 @@ data class GenreEntity(
 
     @ColumnInfo(name = "movie_detail_id")
     var movieDetailId: Int = 0
+
 }

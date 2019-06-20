@@ -48,7 +48,9 @@ class GetGenresUseCase(
                 return mapToGenreLocals(genres, response.genreCategory)
             }
 
-            override fun shouldLoadFromLocal(): Boolean = true
+            override fun shouldLoadFromLocal(): Boolean {
+
+            }
         }
 
     private fun mapToGenreLocals(genres: List<Genre>, genreCategory: String): List<GenreEntity> = genres.map {

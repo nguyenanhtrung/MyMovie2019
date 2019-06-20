@@ -10,6 +10,8 @@ import com.example.mymovie2019.data.local.datasource.movie.MovieLocalDataSource
 import com.example.mymovie2019.data.local.datasource.movie.MovieLocalDataSourceImp
 import com.example.mymovie2019.data.local.datasource.moviedetail.MovieDetailLocalDataSource
 import com.example.mymovie2019.data.local.datasource.moviedetail.MovieDetailLocalDataSourceImp
+import com.example.mymovie2019.data.local.datasource.tvshow.TvShowLocalDataSource
+import com.example.mymovie2019.data.local.datasource.tvshow.TvShowLocalDataSourceImp
 import com.example.mymovie2019.data.remote.datasource.cast.CastRemoteDataSource
 import com.example.mymovie2019.data.remote.datasource.cast.CastRemoteDataSourceImp
 import com.example.mymovie2019.data.remote.datasource.genre.GenreRemoteDataSource
@@ -18,6 +20,8 @@ import com.example.mymovie2019.data.remote.datasource.movie.MovieRemoteDataSourc
 import com.example.mymovie2019.data.remote.datasource.movie.MovieRemoteDataSourceImp
 import com.example.mymovie2019.data.remote.datasource.moviedetail.MovieDetailRemoteDataSource
 import com.example.mymovie2019.data.remote.datasource.moviedetail.MovieDetailRemoteDataSourceImp
+import com.example.mymovie2019.data.remote.datasource.tvshow.TvShowRemoteDataSource
+import com.example.mymovie2019.data.remote.datasource.tvshow.TvShowRemoteDataSourceImp
 import com.example.mymovie2019.data.repository.cast.CastRepository
 import com.example.mymovie2019.data.repository.cast.CastRepositoryImp
 import com.example.mymovie2019.data.repository.character.CharacterRepository
@@ -117,6 +121,18 @@ class RepositoryModule {
     @Singleton
     fun provideCharacterRepository(characterRepositoryImp: CharacterRepositoryImp): CharacterRepository {
         return characterRepositoryImp
+    }
+
+    @Provides
+    @Singleton
+    fun provideTvShowRemoteDataSource(tvShowRemoteDataSource: TvShowRemoteDataSourceImp): TvShowRemoteDataSource {
+        return tvShowRemoteDataSource
+    }
+
+    @Provides
+    @Singleton
+    fun provideTvShowLocalDataSource(tvShowLocalDataSourceImp: TvShowLocalDataSourceImp): TvShowLocalDataSource {
+        return tvShowLocalDataSourceImp
     }
 
 }

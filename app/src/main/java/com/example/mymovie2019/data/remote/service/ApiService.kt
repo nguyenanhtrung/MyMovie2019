@@ -70,4 +70,16 @@ interface ApiService {
         @Query(AppKey.PAGE_PARAMETER) page: Int,
         @Query(AppKey.API_KEY_PARAMETER) apiKey: String
     ): Deferred<TvShowsResponse>
+
+    @GET("tv/latest")
+    fun getLatestTvShowsAsync(
+        @Query(AppKey.PAGE_PARAMETER) page: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+    ): Deferred<TvShowsResponse>
+
+    @GET("tv/on_the_air")
+    fun getOnTheAirTvShowsAsync(
+        @Query(AppKey.PAGE_PARAMETER) page: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+    ): Deferred<TvShowsResponse>
 }

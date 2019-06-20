@@ -47,4 +47,10 @@ class DatabaseModule {
     fun provideCastDao(appDatabase: AppDatabase) : CastDao {
         return appDatabase.castDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideTvShowDao(appDatabase: AppDatabase) : TvShowDao {
+        return appDatabase.tvShowDao()
+    }
 }

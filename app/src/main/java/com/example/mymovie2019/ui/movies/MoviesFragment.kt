@@ -2,6 +2,7 @@ package com.example.mymovie2019.ui.movies
 
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ import com.flurry.android.FlurryAgent
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.json.JSONObject
+import timber.log.Timber
 import java.time.LocalDate
 import java.util.*
 import javax.inject.Inject
@@ -143,6 +145,7 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
 
     //On Click Movie Type Item
     override fun onClickTextSeeAll(view: View, position: Int) {
+        Amplitude.getInstance().logEvent("ON_CLICK_SEE_ALL")
         moviesViewModel.onClickTextSeeAllMovie(position)
     }
 
@@ -201,9 +204,11 @@ class MoviesFragment : BaseFragment(), MovieTypesAdapter.OnLoadMoreMovieItemList
         movieTransfer: MovieTransfer,
         vararg shareViewPairs: Pair<View, String>
     ) {
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *shareViewPairs);
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *shareViewPairs)
         val intent = Intent(requireActivity(), MovieDetailActivity::class.java)
         intent.putExtra(BUNDLE_MOVIE_DETAIL, movieTransfer)
         startActivity(intent, options.toBundle())
+
     }
+
 }

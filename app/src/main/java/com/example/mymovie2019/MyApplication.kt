@@ -12,7 +12,8 @@ import com.example.mymovie2019.di.module.NetworkModule
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 import com.flurry.android.FlurryAgent
-
+import com.google.gson.JsonObject
+import org.json.JSONObject
 
 
 class MyApplication : Application() {
@@ -33,7 +34,10 @@ class MyApplication : Application() {
             .build(this, "VRHW6RW76JGMC7Q63PJF")
 
         Amplitude.getInstance().initialize(this, "9fac6a79e8ce7a5a14be6ee54b2c3280").enableForegroundTracking(this)
-        Amplitude.getInstance().userId = "1102"
+//        Amplitude.getInstance().userId = "1102"
+//        val userProperties= JSONObject()
+//        userProperties.put("[Amplitude] City", "Ha Noi")
+//        Amplitude.getInstance().setUserProperties(userProperties)
 
         setupLogging()
         setupStrictMode()

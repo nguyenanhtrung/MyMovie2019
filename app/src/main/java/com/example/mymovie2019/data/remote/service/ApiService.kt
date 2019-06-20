@@ -16,8 +16,8 @@ interface ApiService {
 
     @GET("movie/popular")
     fun getPopularMovies(
-            @Query(AppKey.PAGE_PARAMETER) page: Int,
-            @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+        @Query(AppKey.PAGE_PARAMETER) page: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
 
     ): Deferred<MoviesResponse>
 
@@ -42,12 +42,16 @@ interface ApiService {
     ): Deferred<CastsResponse>
 
     @GET("movie/{movie_id}")
-    fun getMovieDetailAsync(@Path("movie_id") movieId: Int,
-                            @Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<MovieDetailResponse>
+    fun getMovieDetailAsync(
+        @Path("movie_id") movieId: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+    ): Deferred<MovieDetailResponse>
 
     @GET("movie/{movie_id}/credits")
-    fun getCreditMovieAsync(@Path("movie_id") movieId: Int,
-                            @Query(AppKey.API_KEY_PARAMETER) apiKey: String): Deferred<MovieCreditResponse>
+    fun getCreditMovieAsync(
+        @Path("movie_id") movieId: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+    ): Deferred<MovieCreditResponse>
 
     @GET("person/{person_id}/tv_credits")
     fun getTvShowsOfCastAsync(
@@ -60,4 +64,10 @@ interface ApiService {
         @Path("person_id") castId: Int,
         @Query(AppKey.API_KEY_PARAMETER) apiKey: String
     ): Deferred<CastMovieResponse>
+
+    @GET("tv/popular")
+    fun getPopularTvShowsAsync(
+        @Query(AppKey.PAGE_PARAMETER) page: Int,
+        @Query(AppKey.API_KEY_PARAMETER) apiKey: String
+    ): Deferred<TvShowsResponse>
 }

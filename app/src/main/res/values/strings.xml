@@ -35,4 +35,6 @@
     <string name="title_popular">Popular</string>
     <string name="title_top_rated">Top Rated</string>
     <string name="title_upcoming">Upcoming</string>
+    <string name="title_seasons">Seasons</string>
+    <string name="title_about">About</string>
 </resources>

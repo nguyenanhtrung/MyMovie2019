@@ -9,6 +9,7 @@ import com.example.mymovie2019.ui.main.MainActivity
 import com.example.mymovie2019.ui.moviedetail.MovieDetailActivity
 import com.example.mymovie2019.ui.movies.MoviesFragment
 import com.example.mymovie2019.ui.seemoremovie.SeeMoreMovieFragment
+import com.example.mymovie2019.ui.tvshows.TvShowsFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -36,4 +37,5 @@ interface AppComponent {
 
     fun inject(fragment: SeeMoreMovieFragment)
 
+    fun inject(fragment: TvShowsFragment)
 }

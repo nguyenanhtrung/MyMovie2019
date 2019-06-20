@@ -40,10 +40,10 @@ class CastDetailViewModel @Inject constructor(private val castRepository: CastRe
     }
 
     private fun showCastCredits(castMovieResponse: CastMovieResponse, castTvShowResponse: CastTvShowResponse) {
-        val castMovieTransfers = movieRepository.getMovieTransfers(castMovieResponse.castMovies)
-        val castTvShowTransfers = movieRepository.getMovieTransfers(castTvShowResponse.castTvShows)
-
-        val castCreditPair = Pair(castMovieTransfers, castTvShowTransfers)
-        _castCredits.value = castCreditPair
+//        val castMovieTransfers = movieRepository.getMovieTransfers(castMovieResponse.castMovies)
+//        val castTvShowTransfers = movieRepository.getMovieTransfers(castTvShowResponse.castTvShows)
+//
+//        val castCreditPair = Pair(castMovieTransfers, castTvShowTransfers)
+//        _castCredits.value = castCreditPair
     }
 }

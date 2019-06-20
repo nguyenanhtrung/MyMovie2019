@@ -10,6 +10,7 @@ import com.example.mymovie2019.ui.main.MainViewModel
 import com.example.mymovie2019.ui.moviedetail.MovieDetailViewModel
 import com.example.mymovie2019.ui.movies.MoviesViewModel
 import com.example.mymovie2019.ui.seemoremovie.SeeMoreMovieViewModel
+import com.example.mymovie2019.ui.tvshows.TvShowsViewModel
 import com.example.mymovie2019.utils.AppViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -56,5 +57,9 @@ abstract class ViewModelModule {
     @ViewModelKey(SeeMoreMovieViewModel::class)
     abstract fun bindSeeMoreMovieViewModel(seeMoreMovieViewModel: SeeMoreMovieViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(TvShowsViewModel::class)
+    abstract fun bindTvShowsViewModel(tvShowsViewModel: TvShowsViewModel): ViewModel
 
 }

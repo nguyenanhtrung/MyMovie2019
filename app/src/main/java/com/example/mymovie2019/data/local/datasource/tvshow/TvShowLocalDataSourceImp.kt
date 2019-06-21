@@ -5,6 +5,7 @@ import com.example.mymovie2019.data.local.database.entity.TvShowEntity
 import com.example.mymovie2019.data.local.model.TvShow
 import com.example.mymovie2019.data.local.model.TvShowGroupieItem
 import com.example.mymovie2019.data.local.model.TvShowType
+import com.example.mymovie2019.data.remote.response.Genre
 import com.example.mymovie2019.data.remote.response.TvShowRemote
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class TvShowLocalDataSourceImp @Inject constructor(private val tvShowDao: TvShow
                 it.voteAverage ?: 0.0,
                 it.firstAirDate ?: "",
                 tvShowType.name,
-                page,
+                page
             )
         }
         tvShowDao.insertDatasWithReplace(tvShowEntities)
@@ -27,10 +28,16 @@ class TvShowLocalDataSourceImp @Inject constructor(private val tvShowDao: TvShow
 
     override fun getTvShows(page: Int, tvShowType: TvShowType): List<TvShowGroupieItem> {
         return tvShowDao.getTvShows(page, tvShowType.name).map {
-            TvShowGroupieItem(TvShow(
-                it.id,
-                it.name
-            ))
+            TvShowGroupieItem(
+                TvShow(
+                    it.tvShowEntity.id,
+                    it.tvShowEntity.name,
+                    it.genres.map { genreEntity ->
+                        Genre(genreEntity.id.toInt(), genreEntity.name)
+                    },
+                    it.tvShowEntity.rating
+                )
+            )
         }
     }
 

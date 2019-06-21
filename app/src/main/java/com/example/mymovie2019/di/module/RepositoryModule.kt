@@ -32,6 +32,8 @@ import com.example.mymovie2019.data.repository.movie.MovieRepository
 import com.example.mymovie2019.data.repository.movie.MovieRepositoryImp
 import com.example.mymovie2019.data.repository.moviedetail.MovieDetailRepository
 import com.example.mymovie2019.data.repository.moviedetail.MovieDetailRepositoryImp
+import com.example.mymovie2019.data.repository.tvshow.TvShowRepository
+import com.example.mymovie2019.data.repository.tvshow.TvShowRepositoryImp
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -133,6 +135,12 @@ class RepositoryModule {
     @Singleton
     fun provideTvShowLocalDataSource(tvShowLocalDataSourceImp: TvShowLocalDataSourceImp): TvShowLocalDataSource {
         return tvShowLocalDataSourceImp
+    }
+
+    @Provides
+    @Singleton
+    fun provideTvShowRepository(tvShowRepository: TvShowRepositoryImp): TvShowRepository {
+        return tvShowRepository
     }
 
 }

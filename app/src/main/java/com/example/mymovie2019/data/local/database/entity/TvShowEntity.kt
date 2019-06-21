@@ -26,10 +26,7 @@ data class TvShowEntity(
     val type: String,
 
     @ColumnInfo(name = "page")
-    val page: Int,
-
-    @ColumnInfo(name = "genre")
-    val genre: String
+    val page: Int
 
 ) {
     @PrimaryKey(autoGenerate = true)

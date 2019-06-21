@@ -33,6 +33,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setupUIComponents()
         //
+        mainViewModel
     }
 
     private fun setupUIComponents() {

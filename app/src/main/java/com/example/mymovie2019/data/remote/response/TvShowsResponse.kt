@@ -12,4 +12,4 @@ data class TvShowsResponse(
     val totalPages: Int? = 0, // 1000
     @Json(name = "total_results")
     val totalResults: Int? = 0 // 20000
-)
+): BaseResponse()

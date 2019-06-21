@@ -16,4 +16,7 @@ interface GenreDao : BaseDao<GenreEntity> {
     @Query("UPDATE  Genre SET movie_detail_id = (:movieDetailId) WHERE id IN (:genreIds)")
     fun updateMovieDetailId(movieDetailId: Long, genreIds: List<Long>)
 
+    @Query("UPDATE  Genre SET tv_show_id = (:tvShowId) WHERE id IN (:genreIds)")
+    fun updateTvShowId(tvShowId: Int, genreIds: List<Long>)
+
 }
